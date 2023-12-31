@@ -9,7 +9,7 @@ function App() {
 
 	return (
 		<>
-			<Button style={{position: 'absolute', bottom: '1rem', right: '1rem'}} color="secondary" onClick={toggle}>
+			<Button style={{position: 'fixed', bottom: '1rem', right: '1rem'}} color="secondary" onClick={toggle}>
 				Abrir
 			</Button>
 			<Modal isOpen={open} toggle={toggle} fade={false} fullscreen>

@@ -55,7 +55,7 @@ const Curse: FC<CurseProps> = ({ nrc, curse }) => {
 				</Col>
 				<Col xl={12}>
 					{currIdx + 1} / {availableSch.length}
-					<ButtonGroup className="mx-2">
+					<ButtonGroup className="mx-2  float-end">
 						<Button
 							color="primary"
 							onClick={() => {

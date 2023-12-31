@@ -7,7 +7,7 @@ body {
 	display: grid;
 	grid-template-columns: 20rem 1fr;
 	gap: .5rem;
-	height: calc(100dvh - 2rem);
+	height: calc(100dvh - 10.5rem);
 	padding: .5rem;
 }
 
@@ -20,9 +20,8 @@ body {
 
 .toolBar {
 	display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
+	overflow: auto;
+	flex-direction: column;
 	gap: .5rem;
 	align-items: stretch;
 }

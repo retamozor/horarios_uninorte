@@ -1,4 +1,4 @@
-import appStyle from '../assets/css/app.module.css'
+import appStyle from "../assets/css/app.module.css";
 import ToolBar from "./ToolBar";
 import WeekLayout from "./WeekLayout";
 
