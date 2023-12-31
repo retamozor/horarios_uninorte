@@ -1,3 +1,4 @@
+import { Button, ButtonGroup } from "reactstrap";
 import appStyle from "../assets/css/app.module.css";
 import { useStore } from "../data/useStore";
 import Curse from "./Curse";
@@ -13,8 +14,14 @@ const ToolBar = () => {
 		<div className={[appStyle.toolBar, appStyle.shadow].join(" ")}>
 			<p>
 				Horario #{index}
-				<button onClick={() => decrease(1)}>-</button>
-				<button onClick={() => increase(1)}>+</button>
+				<ButtonGroup className="mx-2">
+					<Button color="primary" onClick={() => decrease(1)}>
+						-
+					</Button>
+					<Button color="primary" onClick={() => increase(1)}>
+						+
+					</Button>
+				</ButtonGroup>
 			</p>
 
 			{curses.map(curse => {

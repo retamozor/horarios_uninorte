@@ -48,7 +48,7 @@ const useCalcAllshcedules = () => {
 	};
 
 	useEffect(() => {
-		const newSchedules = combine(data).filter(sch => !haveConflict(sch));
+		const newSchedules = combine([...data]).filter(sch => !haveConflict(sch));
 		setMax(newSchedules.length - 1);
 		setSchedules(newSchedules);
 	}, [data]);
