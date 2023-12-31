@@ -1,0 +1,300 @@
+{
+  "ART0020": {
+      "1501": {
+          "NRC": "1501",
+          "NOMBRE_ASIGNATURA": "FOTOGRAFIA Y LABORATORIO",
+          "MATCURSO": "ART0020",
+          "PROFESOR": "Gil Zubiria Julio Cesar",
+          "FECHAS": "Mon Jan 29 2024 00:00:00 GMT-0500 (Colombia Standard Time)_Sun May 26 2024 00:00:00 GMT-0500 (Colombia Standard Time)",
+          "HORAS": "0630_0927",
+          "DIAS": "T",
+          "SALON": "32C",
+          "CAPACIDAD": 40,
+          "OCUPADO": 0,
+          "DISPONIBLES": 40
+      },
+      "3828": {
+          "NRC": "3828",
+          "NOMBRE_ASIGNATURA": "FOTOGRAFIA Y LABORATORIO",
+          "MATCURSO": "ART0020",
+          "PROFESOR": "Gutierrez Ravelo Raquel Maria",
+          "FECHAS": "Mon Jan 29 2024 00:00:00 GMT-0500 (Colombia Standard Time)_Sun May 26 2024 00:00:00 GMT-0500 (Colombia Standard Time)",
+          "HORAS": "1430_1727",
+          "DIAS": "T",
+          "SALON": "32C",
+          "CAPACIDAD": 40,
+          "OCUPADO": 0,
+          "DISPONIBLES": 40
+      },
+      "3829": {
+          "NRC": "3829",
+          "NOMBRE_ASIGNATURA": "FOTOGRAFIA Y LABORATORIO",
+          "MATCURSO": "ART0020",
+          "PROFESOR": "Gutierrez Ravelo Raquel Maria",
+          "FECHAS": "Mon Jan 29 2024 00:00:00 GMT-0500 (Colombia Standard Time)_Sun May 26 2024 00:00:00 GMT-0500 (Colombia Standard Time)",
+          "HORAS": "0930_1227",
+          "DIAS": "T",
+          "SALON": "32C",
+          "CAPACIDAD": 40,
+          "OCUPADO": 0,
+          "DISPONIBLES": 40
+      },
+      "3830": {
+          "NRC": "3830",
+          "NOMBRE_ASIGNATURA": "FOTOGRAFIA Y LABORATORIO",
+          "MATCURSO": "ART0020",
+          "PROFESOR": "Gil Zubiria Julio Cesar",
+          "FECHAS": "Mon Jan 29 2024 00:00:00 GMT-0500 (Colombia Standard Time)_Sun May 26 2024 00:00:00 GMT-0500 (Colombia Standard Time)",
+          "HORAS": "0630_0927",
+          "DIAS": "W",
+          "SALON": "31C",
+          "CAPACIDAD": 40,
+          "OCUPADO": 0,
+          "DISPONIBLES": 40
+      }
+  },
+  "CSV0040": {
+      "1645": {
+          "NRC": "1645",
+          "NOMBRE_ASIGNATURA": "FUNDAMENTO DE FISICA",
+          "MATCURSO": "CSV0040",
+          "PROFESOR": "Ortiz Royero Juan Carlos",
+          "FECHAS": "Mon Jan 29 2024 00:00:00 GMT-0500 (Colombia Standard Time)_Sun May 26 2024 00:00:00 GMT-0500 (Colombia Standard Time)/Mon Jan 29 2024 00:00:00 GMT-0500 (Colombia Standard Time)_Sun May 26 2024 00:00:00 GMT-0500 (Colombia Standard Time)",
+          "HORAS": "1630_1729/0930_1128",
+          "DIAS": "T/R",
+          "SALON": "14J/12J",
+          "CAPACIDAD": 40,
+          "OCUPADO": 0,
+          "DISPONIBLES": 40
+      },
+      "1646": {
+          "NRC": "1646",
+          "NOMBRE_ASIGNATURA": "FUNDAMENTO DE FISICA",
+          "MATCURSO": "CSV0040",
+          "PROFESOR": "Ortiz Royero Juan Carlos",
+          "FECHAS": "Mon Jan 29 2024 00:00:00 GMT-0500 (Colombia Standard Time)_Sun May 26 2024 00:00:00 GMT-0500 (Colombia Standard Time)/Mon Jan 29 2024 00:00:00 GMT-0500 (Colombia Standard Time)_Sun May 26 2024 00:00:00 GMT-0500 (Colombia Standard Time)",
+          "HORAS": "0730_0829/0930_1128",
+          "DIAS": "R/T",
+          "SALON": "12J/12J",
+          "CAPACIDAD": 40,
+          "OCUPADO": 0,
+          "DISPONIBLES": 40
+      },
+      "3911": {
+          "NRC": "3911",
+          "NOMBRE_ASIGNATURA": "FUNDAMENTO DE FISICA",
+          "MATCURSO": "CSV0040",
+          "PROFESOR": "Mass Varela Julio Alberto",
+          "FECHAS": "Mon Jan 29 2024 00:00:00 GMT-0500 (Colombia Standard Time)_Sun May 26 2024 00:00:00 GMT-0500 (Colombia Standard Time)/Mon Jan 29 2024 00:00:00 GMT-0500 (Colombia Standard Time)_Sun May 26 2024 00:00:00 GMT-0500 (Colombia Standard Time)",
+          "HORAS": "1030_1228/0930_1029",
+          "DIAS": "T/M",
+          "SALON": "L-S2J/L-S2J",
+          "CAPACIDAD": 20,
+          "OCUPADO": 0,
+          "DISPONIBLES": 20
+      }
+  },
+  "DIG4021": {
+      "1675": {
+          "NRC": "1675",
+          "NOMBRE_ASIGNATURA": "TALLER DE TIPOGRAFIA",
+          "MATCURSO": "DIG4021",
+          "PROFESOR": "Betts Alvear Mark Michael",
+          "FECHAS": "Mon Jan 29 2024 00:00:00 GMT-0500 (Colombia Standard Time)_Sun May 26 2024 00:00:00 GMT-0500 (Colombia Standard Time)/Mon Jan 29 2024 00:00:00 GMT-0500 (Colombia Standard Time)_Sun May 26 2024 00:00:00 GMT-0500 (Colombia Standard Time)",
+          "HORAS": "0630_0927/0930_1227",
+          "DIAS": "R/T",
+          "SALON": "4L-3/4L-2",
+          "CAPACIDAD": 22,
+          "OCUPADO": 0,
+          "DISPONIBLES": 22
+      },
+      "1676": {
+          "NRC": "1676",
+          "NOMBRE_ASIGNATURA": "TALLER DE TIPOGRAFIA",
+          "MATCURSO": "DIG4021",
+          "PROFESOR": "Mannaa Mannah Ruaida",
+          "FECHAS": "Mon Jan 29 2024 00:00:00 GMT-0500 (Colombia Standard Time)_Sun May 26 2024 00:00:00 GMT-0500 (Colombia Standard Time)/Mon Jan 29 2024 00:00:00 GMT-0500 (Colombia Standard Time)_Sun May 26 2024 00:00:00 GMT-0500 (Colombia Standard Time)",
+          "HORAS": "0930_1227/0630_0927",
+          "DIAS": "W/M",
+          "SALON": "4L-3/4L-2",
+          "CAPACIDAD": 21,
+          "OCUPADO": 0,
+          "DISPONIBLES": 21
+      },
+      "1677": {
+          "NRC": "1677",
+          "NOMBRE_ASIGNATURA": "TALLER DE TIPOGRAFIA",
+          "MATCURSO": "DIG4021",
+          "PROFESOR": "NIEBLES DE LA TORRE ANA LUISA",
+          "FECHAS": "Mon Jan 29 2024 00:00:00 GMT-0500 (Colombia Standard Time)_Sun May 26 2024 00:00:00 GMT-0500 (Colombia Standard Time)/Mon Jan 29 2024 00:00:00 GMT-0500 (Colombia Standard Time)_Sun May 26 2024 00:00:00 GMT-0500 (Colombia Standard Time)",
+          "HORAS": "0930_1227/0930_1227",
+          "DIAS": "M/R",
+          "SALON": "4L-3/4L-1",
+          "CAPACIDAD": 21,
+          "OCUPADO": 0,
+          "DISPONIBLES": 21
+      }
+  },
+  "DIS0029": {
+      "1717": {
+          "NRC": "1717",
+          "NOMBRE_ASIGNATURA": "ESTETICA Y SEMIOTICA",
+          "MATCURSO": "DIS0029",
+          "PROFESOR": "PLATA CHACON EDGAR ARMANDO",
+          "FECHAS": "Mon Jan 29 2024 00:00:00 GMT-0500 (Colombia Standard Time)_Sun May 26 2024 00:00:00 GMT-0500 (Colombia Standard Time)",
+          "HORAS": "1430_1727",
+          "DIAS": "W",
+          "SALON": "11G2",
+          "CAPACIDAD": 43,
+          "OCUPADO": 0,
+          "DISPONIBLES": 43
+      },
+      "1718": {
+          "NRC": "1718",
+          "NOMBRE_ASIGNATURA": "ESTETICA Y SEMIOTICA",
+          "MATCURSO": "DIS0029",
+          "PROFESOR": "PLATA CHACON EDGAR ARMANDO",
+          "FECHAS": "Mon Jan 29 2024 00:00:00 GMT-0500 (Colombia Standard Time)_Sun May 26 2024 00:00:00 GMT-0500 (Colombia Standard Time)",
+          "HORAS": "0930_1227",
+          "DIAS": "F",
+          "SALON": "23G2",
+          "CAPACIDAD": 43,
+          "OCUPADO": 0,
+          "DISPONIBLES": 43
+      }
+  },
+  "DIS0031": {
+      "1723": {
+          "NRC": "1723",
+          "NOMBRE_ASIGNATURA": "PORTAFOLIO",
+          "MATCURSO": "DIS0031",
+          "PROFESOR": "Ruiz Bacca Miguel Angel",
+          "FECHAS": "Mon Jan 29 2024 00:00:00 GMT-0500 (Colombia Standard Time)_Sun May 26 2024 00:00:00 GMT-0500 (Colombia Standard Time)",
+          "HORAS": "1730_1829",
+          "DIAS": "T",
+          "SALON": "4L-2",
+          "CAPACIDAD": 20,
+          "OCUPADO": 0,
+          "DISPONIBLES": 20
+      },
+      "1724": {
+          "NRC": "1724",
+          "NOMBRE_ASIGNATURA": "PORTAFOLIO",
+          "MATCURSO": "DIS0031",
+          "PROFESOR": "Muñoz Barrios Gabriela Patricia",
+          "FECHAS": "Mon Jan 29 2024 00:00:00 GMT-0500 (Colombia Standard Time)_Sun May 26 2024 00:00:00 GMT-0500 (Colombia Standard Time)",
+          "HORAS": "1730_1829",
+          "DIAS": "W",
+          "SALON": "4L-2",
+          "CAPACIDAD": 20,
+          "OCUPADO": 0,
+          "DISPONIBLES": 20
+      },
+      "1725": {
+          "NRC": "1725",
+          "NOMBRE_ASIGNATURA": "PORTAFOLIO",
+          "MATCURSO": "DIS0031",
+          "PROFESOR": "NARANJO CARDONA PABLO ANDRES",
+          "FECHAS": "Mon Jan 29 2024 00:00:00 GMT-0500 (Colombia Standard Time)_Sun May 26 2024 00:00:00 GMT-0500 (Colombia Standard Time)",
+          "HORAS": "1730_1829",
+          "DIAS": "R",
+          "SALON": "4L-2",
+          "CAPACIDAD": 20,
+          "OCUPADO": 0,
+          "DISPONIBLES": 20
+      },
+      "1726": {
+          "NRC": "1726",
+          "NOMBRE_ASIGNATURA": "PORTAFOLIO",
+          "MATCURSO": "DIS0031",
+          "PROFESOR": "NARANJO CARDONA PABLO ANDRES",
+          "FECHAS": "Mon Jan 29 2024 00:00:00 GMT-0500 (Colombia Standard Time)_Sun May 26 2024 00:00:00 GMT-0500 (Colombia Standard Time)",
+          "HORAS": "1830_1929",
+          "DIAS": "R",
+          "SALON": "4L-2",
+          "CAPACIDAD": 21,
+          "OCUPADO": 0,
+          "DISPONIBLES": 21
+      }
+  },
+  "IGL4910": {
+      "4256": {
+          "NRC": "4256",
+          "NOMBRE_ASIGNATURA": "EXIGENCIA  INGLES V",
+          "MATCURSO": "IGL4910",
+          "PROFESOR": "Rodriguez Sanchez Andres Guillermo",
+          "FECHAS": "Mon Jan 29 2024 00:00:00 GMT-0500 (Colombia Standard Time)_Sun May 26 2024 00:00:00 GMT-0500 (Colombia Standard Time)/Mon Jan 29 2024 00:00:00 GMT-0500 (Colombia Standard Time)_Sun May 26 2024 00:00:00 GMT-0500 (Colombia Standard Time)/Mon Jan 29 2024 00:00:00 GMT-0500 (Colombia Standard Time)_Sun May 26 2024 00:00:00 GMT-0500 (Colombia Standard Time)",
+          "HORAS": "1630_1729/1530_1629/1430_1628",
+          "DIAS": "W/R/T",
+          "SALON": "I1-25/I1-24/38G2",
+          "CAPACIDAD": 22,
+          "OCUPADO": 0,
+          "DISPONIBLES": 22
+      },
+      "4257": {
+          "NRC": "4257",
+          "NOMBRE_ASIGNATURA": "EXIGENCIA  INGLES V",
+          "MATCURSO": "IGL4910",
+          "PROFESOR": "Rodriguez Sanchez Andres Guillermo",
+          "FECHAS": "Mon Jan 29 2024 00:00:00 GMT-0500 (Colombia Standard Time)_Sun May 26 2024 00:00:00 GMT-0500 (Colombia Standard Time)/Mon Jan 29 2024 00:00:00 GMT-0500 (Colombia Standard Time)_Sun May 26 2024 00:00:00 GMT-0500 (Colombia Standard Time)/Mon Jan 29 2024 00:00:00 GMT-0500 (Colombia Standard Time)_Sun May 26 2024 00:00:00 GMT-0500 (Colombia Standard Time)",
+          "HORAS": "1030_1129/1030_1228/1130_1229",
+          "DIAS": "M/R/W",
+          "SALON": "I1-21/I1-22/I1-23",
+          "CAPACIDAD": 22,
+          "OCUPADO": 0,
+          "DISPONIBLES": 22
+      },
+      "4258": {
+          "NRC": "4258",
+          "NOMBRE_ASIGNATURA": "EXIGENCIA  INGLES V",
+          "MATCURSO": "IGL4910",
+          "PROFESOR": "Rodriguez Sanchez Andres Guillermo",
+          "FECHAS": "Mon Jan 29 2024 00:00:00 GMT-0500 (Colombia Standard Time)_Sun May 26 2024 00:00:00 GMT-0500 (Colombia Standard Time)/Mon Jan 29 2024 00:00:00 GMT-0500 (Colombia Standard Time)_Sun May 26 2024 00:00:00 GMT-0500 (Colombia Standard Time)/Mon Jan 29 2024 00:00:00 GMT-0500 (Colombia Standard Time)_Sun May 26 2024 00:00:00 GMT-0500 (Colombia Standard Time)",
+          "HORAS": "1030_1228/1030_1129/1130_1229",
+          "DIAS": "T/W/M",
+          "SALON": "I1-24/I1-25/I1-24",
+          "CAPACIDAD": 22,
+          "OCUPADO": 0,
+          "DISPONIBLES": 22
+      },
+      "4259": {
+          "NRC": "4259",
+          "NOMBRE_ASIGNATURA": "EXIGENCIA  INGLES V",
+          "MATCURSO": "IGL4910",
+          "PROFESOR": "Bermudez Puello Edgar Alexander",
+          "FECHAS": "Mon Jan 29 2024 00:00:00 GMT-0500 (Colombia Standard Time)_Sun May 26 2024 00:00:00 GMT-0500 (Colombia Standard Time)/Mon Jan 29 2024 00:00:00 GMT-0500 (Colombia Standard Time)_Sun May 26 2024 00:00:00 GMT-0500 (Colombia Standard Time)/Mon Jan 29 2024 00:00:00 GMT-0500 (Colombia Standard Time)_Sun May 26 2024 00:00:00 GMT-0500 (Colombia Standard Time)",
+          "HORAS": "1430_1529/1330_1528/1430_1529",
+          "DIAS": "F/R/T",
+          "SALON": "I2-23/I2-24/I1-24",
+          "CAPACIDAD": 22,
+          "OCUPADO": 0,
+          "DISPONIBLES": 22
+      },
+      "4260": {
+          "NRC": "4260",
+          "NOMBRE_ASIGNATURA": "EXIGENCIA  INGLES V",
+          "MATCURSO": "IGL4910",
+          "PROFESOR": "Herrera Arellana Myrna Edith",
+          "FECHAS": "Mon Jan 29 2024 00:00:00 GMT-0500 (Colombia Standard Time)_Sun May 26 2024 00:00:00 GMT-0500 (Colombia Standard Time)/Mon Jan 29 2024 00:00:00 GMT-0500 (Colombia Standard Time)_Sun May 26 2024 00:00:00 GMT-0500 (Colombia Standard Time)/Mon Jan 29 2024 00:00:00 GMT-0500 (Colombia Standard Time)_Sun May 26 2024 00:00:00 GMT-0500 (Colombia Standard Time)",
+          "HORAS": "0830_1028/1630_1729/1830_1929",
+          "DIAS": "F/R/T",
+          "SALON": "21J/11G2/41G1",
+          "CAPACIDAD": 22,
+          "OCUPADO": 0,
+          "DISPONIBLES": 22
+      },
+      "4261": {
+          "NRC": "4261",
+          "NOMBRE_ASIGNATURA": "EXIGENCIA  INGLES V",
+          "MATCURSO": "IGL4910",
+          "PROFESOR": "Londoño Alzate Juan Camilo",
+          "FECHAS": "Mon Jan 29 2024 00:00:00 GMT-0500 (Colombia Standard Time)_Sun May 26 2024 00:00:00 GMT-0500 (Colombia Standard Time)/Mon Jan 29 2024 00:00:00 GMT-0500 (Colombia Standard Time)_Sun May 26 2024 00:00:00 GMT-0500 (Colombia Standard Time)/Mon Jan 29 2024 00:00:00 GMT-0500 (Colombia Standard Time)_Sun May 26 2024 00:00:00 GMT-0500 (Colombia Standard Time)",
+          "HORAS": "1230_1428/0630_0729/1030_1129",
+          "DIAS": "R/M/F",
+          "SALON": "I4-23/I1-24/I4-S12",
+          "CAPACIDAD": 22,
+          "OCUPADO": 0,
+          "DISPONIBLES": 22
+      }
+  }
+}
