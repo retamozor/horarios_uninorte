@@ -1,12 +1,12 @@
 // ==UserScript==
 // @name         Mi App de React
-// @namespace    http://tampermonkey.net/
-// @version      0.1
+// @namespace    https://github.com/retamozor/horarios_uninorte/
+// @version      0.2
 // @description  Inserta tu App de React en la página
 // @author       Rafael
 // @match        https://pomelo.uninorte.edu.co/mihorario/*
-// @require	     https://github.com/retamozor/horarios_uninorte/raw/main/dist/assets/index-HwSGWOgQ.js
-// @resource     AppStyles https://github.com/retamozor/horarios_uninorte/raw/main/dist/assets/index-j7V5XzRi.css
+// @require	     https://github.com/retamozor/horarios_uninorte/raw/main/dist/assets/index-40Hxu3xF.js
+// @resource     AppStyles https://github.com/retamozor/horarios_uninorte/raw/main/dist/assets/index-N1PiZmuu.css
 // @updateURL    https://github.com/retamozor/horarios_uninorte/raw/main/tampermonkey.js
 // @downloadURL  https://github.com/retamozor/horarios_uninorte/main/tampermonkey.js
 // @grant        GM_addStyle
