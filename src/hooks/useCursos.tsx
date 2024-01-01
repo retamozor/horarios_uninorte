@@ -41,6 +41,7 @@ const useCursos = () => {
 			)
 			.then(res => setCursos(res.data))
 			.catch(_ => setCursos({}));
+		// setCursos(data);
 
 		return () => {
 			controller.abort();

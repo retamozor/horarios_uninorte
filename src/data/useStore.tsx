@@ -3,13 +3,24 @@ import { Schedule } from "../hooks/useCalcAllshcedules";
 import { Curse } from "../hooks/useMapData";
 import { Proyeccion } from "../hooks/useProyeccion";
 
+interface FilterCurses {
+	[key: string]: Filter[];
+}
+
+interface Filter {
+	nrc: string;
+	teacher: string;
+	active: boolean;
+}
 interface State {
 	max: number;
 	index: number;
 	schedules: Schedule[];
 	curses: Curse[];
+	filterCurses: Curse[];
 	proyeccion: Proyeccion[];
 	selectedCurses: Proyeccion[];
+	filter: FilterCurses;
 	setMax: (by: number) => void;
 	increase: (by: number) => void;
 	decrease: (by: number) => void;
@@ -19,6 +30,7 @@ interface State {
 	getHorun: () => HorUN;
 	setProyeccion: (proyeccion: Proyeccion[]) => void;
 	setSelectedCurses: (selectedCurses: Proyeccion[]) => void;
+	setFilter: (curse: string, value: Filter[]) => void;
 }
 
 interface HorUN {
@@ -32,13 +44,15 @@ interface HorUN {
 	coordinador: string;
 }
 
-export const useStore = create<State>()(set => ({
+export const useStore = create<State>()((set, get) => ({
 	max: 0,
 	index: 0,
 	schedules: [],
 	curses: [],
+	filterCurses: [],
 	proyeccion: [],
 	selectedCurses: [],
+	filter: {},
 	setMax: by => set({ max: by }),
 	increase: by =>
 		set(state => {
@@ -57,7 +71,7 @@ export const useStore = create<State>()(set => ({
 			return { index };
 		}),
 	setSchedules: schedules => set({ schedules }),
-	setCurses: curses => set({ curses }),
+	setCurses: curses => set({ curses, filterCurses: curses, filter: {} }),
 	getHorun: () =>
 		JSON.parse(
 			localStorage.getItem("horun") ??
@@ -65,4 +79,17 @@ export const useStore = create<State>()(set => ({
 		),
 	setProyeccion: proyeccion => set({ proyeccion }),
 	setSelectedCurses: selectedCurses => set({ selectedCurses }),
+	setFilter: (curse, value) => {
+		const filter = { ...get().filter, [curse]: value };
+		const filterCurses = get().curses.map(curse => {
+			const filterNRC = filter[curse.curse];
+			return {
+				...curse,
+				nrcs: curse.nrcs.filter(
+					nrc => filterNRC?.find(f => f.nrc === nrc.nrc)?.active ?? true
+				),
+			};
+		});
+		set({ filter, filterCurses });
+	},
 }));

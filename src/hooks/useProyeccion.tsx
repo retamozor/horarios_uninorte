@@ -23,6 +23,7 @@ const useProyeccion = () => {
 			})
 			.then(res => setProyeccion(res.data))
 			.catch(_ => setProyeccion([]));
+		// setProyeccion(data);
 
 		return () => {
 			controller.abort();

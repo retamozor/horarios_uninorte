@@ -11,7 +11,7 @@ export interface Schedule {
 const useCalcAllshcedules = () => {
 	useMapData();
 	const [schedules, setSchedules] = useState<Schedule[]>([]);
-	const data = useStore(state => state.curses);
+	const filterCurses = useStore(state => state.filterCurses);
 	const setMax = useStore(state => state.setMax);
 
 	const combine = (curses: Curse[]): Schedule[] => {
@@ -48,10 +48,10 @@ const useCalcAllshcedules = () => {
 	};
 
 	useEffect(() => {
-		const newSchedules = combine([...data]).filter(sch => !haveConflict(sch));
+		const newSchedules = combine([...filterCurses]).filter(sch => !haveConflict(sch));
 		setMax(newSchedules.length - 1);
 		setSchedules(newSchedules);
-	}, [data]);
+	}, [filterCurses]);
 	return schedules;
 };
 

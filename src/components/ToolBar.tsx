@@ -1,7 +1,7 @@
 import { Button, ButtonGroup, Col, Row } from "reactstrap";
 import appStyle from "../assets/css/app.module.css";
 import { useStore } from "../data/useStore";
-import Curse from "./Curse";
+import Curse from "./Curse/Curse";
 import { useState } from "react";
 import ProyeccionModal from "./ProyeccionModal";
 
@@ -10,7 +10,7 @@ const ToolBar = () => {
 	const decrease = useStore(state => state.decrease);
 	const index = useStore(state => state.index);
 	const schedules = useStore(state => state.schedules);
-	const curses = useStore(state => state.curses);
+	const curses = useStore(state => state.filterCurses);
 
 	const [isOpen, setIsOpen] = useState(false);
 	const toggle = () => setIsOpen(o => !o);
@@ -18,18 +18,7 @@ const ToolBar = () => {
 	// console.clear();
 	return (
 		<div className={[appStyle.toolBar, appStyle.shadow].join(" ")}>
-			<Col
-				style={{
-					position: "sticky",
-					top: "-0.5rem",
-					margin: "-0.5rem",
-					background: "white",
-					zIndex: 1,
-					padding: "0.5rem",
-					marginBottom: 0,
-					paddingBottom: 0,
-				}}
-			>
+			<div className={appStyle["toolBar-header"]}>
 				<Row>
 					<Col md="12" className="mb-2">
 						<Button color="primary" onClick={() => toggle()}>
@@ -58,7 +47,7 @@ const ToolBar = () => {
 						marginTop: "0.5rem",
 					}}
 				/>
-			</Col>
+			</div>
 			{curses.map(curse => {
 				const schedule = schedules[index];
 				if (schedule === undefined) return null;
