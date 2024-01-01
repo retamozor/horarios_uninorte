@@ -1,7 +1,7 @@
 import { useEffect } from "react";
-import cursos from "../data/cursos.json";
 import { Day, Hour } from "../containers/Cell";
 import { useStore } from "../data/useStore";
+import useCursos from "./useCursos";
 
 export interface Curse {
 	name: string;
@@ -28,7 +28,8 @@ interface Schedule {
 }
 
 const useMapData = () => {
-  const setCurses = useStore(state => state.setCurses)
+  const setCurses = useStore(state => state.setCurses);
+  const cursos = useCursos();
 
 	useEffect(() => {
 		const curses = Object.values(cursos).map(value => {
@@ -57,7 +58,7 @@ const useMapData = () => {
 			};
 		});
 		setCurses(curses);
-	}, []);
+	}, [cursos]);
 
 	return;
 };

@@ -1,11 +1,11 @@
 // ==UserScript==
 // @name         Mi Horario Uninorte
-// @namespace    https://github.com/retamozor/horarios_uninorte/
-// @version      0.4
+// @namespace    https://github.com/retamozor/horarios_uninorte
+// @version      0.5
 // @description  Genera tu horario uninorte
 // @author       Rafael
 // @match        https://pomelo.uninorte.edu.co/mihorario/*
-// @require	     https://github.com/retamozor/horarios_uninorte/raw/main/dist/assets/index-ruooUYdo.js
+// @require	     https://github.com/retamozor/horarios_uninorte/raw/main/dist/assets/index-Pv9A2fHs.js
 // @resource     AppStyles https://github.com/retamozor/horarios_uninorte/raw/main/dist/assets/index-lHvq-fct.css
 // @updateURL    https://github.com/retamozor/horarios_uninorte/raw/main/tampermonkey.js
 // @downloadURL  https://github.com/retamozor/horarios_uninorte/main/tampermonkey.js
