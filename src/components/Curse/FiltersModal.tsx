@@ -44,9 +44,6 @@ const FiltersModal: FC<FiltersModalModalProps> = ({
 					?.filter(nrc => nrc.teacher === name)
 					.some(nrc => nrc.active) ?? true,
 		}));
-		if (originalCurse.curse === "ART0020") {
-			console.log(t);
-		}
 		return t;
 	}, [originalCurse, filter]);
 
@@ -71,7 +68,6 @@ const FiltersModal: FC<FiltersModalModalProps> = ({
 						teacher: nrc.teacher,
 						active: nrc.active,
 					}));
-					console.log(data);
 					setFilter(curse.curse, data);
 					toggle();
 				}}

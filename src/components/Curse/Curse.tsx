@@ -9,22 +9,22 @@ import { faChevronDown, faFilter } from "@fortawesome/free-solid-svg-icons";
 import FiltersModal from "./FiltersModal";
 
 interface CurseProps {
-	nrc: Nrc;
+	nrc?: Nrc;
 	curse: Curse;
 }
 const Curse: FC<CurseProps> = ({ nrc, curse }) => {
 	const schedules = useStore(state => state.schedules);
 	const index = useStore(state => state.index);
 	const setIndex = useStore(state => state.setIndex);
+	const filterCurses = useStore(state => state.filterCurses);
 	const [open, setOpen] = useState(false);
 	const [filtersOpen, setFiltersOpen] = useState(false);
 	const toggle = () => setOpen(o => !o);
-	const toggleFilter = () => setFiltersOpen(o => !o);
 
 	const availableSch = useMemo(() => {
 		const filters = schedules[index]?.nrcs
 			.map(n => ({ nrc: n.nrc, curse: n.curse }))
-			.filter(n => n.nrc !== nrc.nrc);
+			.filter(n => n.nrc !== nrc?.nrc);
 		return schedules.filter(schedule => {
 			return schedule.nrcs.every(n => {
 				const filter = filters.find(filter => filter.curse === n.curse);
@@ -41,12 +41,14 @@ const Curse: FC<CurseProps> = ({ nrc, curse }) => {
 		avl => avl.id === schedules[index]?.id
 	);
 
+	const nrcs = filterCurses.find(c => c.curse === curse.curse)?.nrcs ?? []
+
 	return (
 		<div
 			className={appStyle.shadow}
 			style={{
 				marginBlock: ".5rems",
-				background: `#${randomLightColor(nrc.name)}`,
+				background: `#${randomLightColor(curse.name)}`,
 			}}
 		>
 			<Row>
@@ -77,16 +79,25 @@ const Curse: FC<CurseProps> = ({ nrc, curse }) => {
 					</ButtonGroup>
 				</Col>
 				<Col md={9} className="mb-2">
-					{curse.nrcs.map(curseNrc => (
+					{nrcs.map(curseNrc => (
 						<Button
+							key={curseNrc.nrc}
 							className="mx-1"
 							size="sm"
 							style={{
 								borderRadius: "50rem",
 								display: "inline-block",
-								background: curseNrc.nrc === nrc.nrc ? "#0a58ca" : "#0d6efd",
+								background: curseNrc.nrc === nrc?.nrc ? "#0a58ca" : "#0d6efd",
 								padding: "0.1rem 0.5rem",
 								border: "none",
+							}}
+							onClick={() => {
+								if (curseNrc.nrc === nrc?.nrc) return
+								const newIndex = schedules.findIndex(sch =>
+									sch.nrcs.some(schNrc => schNrc.nrc === curseNrc.nrc)
+								);
+								if (newIndex === -1) return
+								setIndex(newIndex)
 							}}
 						>
 							{curseNrc.nrc}
@@ -96,7 +107,7 @@ const Curse: FC<CurseProps> = ({ nrc, curse }) => {
 				<Col md={3} className="mb-2">
 					<ButtonGroup className="mx-2  float-end" size="sm">
 						<Button size="sm" color="primary">
-							<FontAwesomeIcon icon={faFilter} onClick={toggleFilter} />
+							<FontAwesomeIcon icon={faFilter} onClick={() => setFiltersOpen(true)} />
 						</Button>
 						<Button size="sm" color="primary" onClick={toggle}>
 							<FontAwesomeIcon icon={faChevronDown} />
@@ -107,19 +118,19 @@ const Curse: FC<CurseProps> = ({ nrc, curse }) => {
 			<Collapse isOpen={open}>
 				<div className={appStyle.shadow}>
 					<p style={{ margin: 0 }}>
-						<b>profesor: </b> {nrc.teacher}
+						<b>profesor: </b> {nrc?.teacher ?? ''}
 					</p>
 					<p style={{ margin: 0 }}>
 						<b>nrc: </b>
-						{nrc.nrc}
+						{nrc?.nrc ?? ''}
 					</p>
 					<p style={{ margin: 0 }}>
 						<b>disponible: </b>
-						{nrc.available}
+						{nrc?.available ?? ''}
 					</p>
 				</div>
 			</Collapse>
-			<FiltersModal isOpen={filtersOpen} toggle={toggleFilter} curse={curse} />
+			<FiltersModal isOpen={filtersOpen} toggle={() => setFiltersOpen(false)} curse={curse} />
 		</div>
 	);
 };

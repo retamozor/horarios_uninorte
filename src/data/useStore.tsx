@@ -53,7 +53,13 @@ export const useStore = create<State>()((set, get) => ({
 	proyeccion: [],
 	selectedCurses: [],
 	filter: {},
-	setMax: by => set({ max: by }),
+	setMax: by => {
+		if (by < 0) {
+			set({ max: 0 });
+			return;
+		}
+		set({ max: by });
+	},
 	increase: by =>
 		set(state => {
 			if (state.index + by > state.max) return { index: state.index };

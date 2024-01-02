@@ -21,7 +21,7 @@ const useGetSchedule = () => {
 		setSchedules(schedules)
 		if (schedules.length === 0) return;
 		const schedule = schedules[index];
-
+		console.log(schedules)
 		const cells = schedule.nrcs.flatMap(nrc => {
 			return nrc.shcedules.map(sch => ({
 				day: sch.day,
@@ -43,6 +43,9 @@ const useGetSchedule = () => {
 			}));
 		});
 		setSchedule(cells);
+		return () => {
+			setSchedule([])
+		}
 	}, [schedules, index]);
 
 	return schedule;

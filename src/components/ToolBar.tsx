@@ -10,7 +10,7 @@ const ToolBar = () => {
 	const decrease = useStore(state => state.decrease);
 	const index = useStore(state => state.index);
 	const schedules = useStore(state => state.schedules);
-	const curses = useStore(state => state.filterCurses);
+	const curses = useStore(state => state.curses);
 
 	const [isOpen, setIsOpen] = useState(false);
 	const toggle = () => setIsOpen(o => !o);
@@ -26,7 +26,7 @@ const ToolBar = () => {
 						</Button>
 					</Col>
 					<Col>
-						Horario {index + 1} / {schedules.length}
+						Horario {index + 1} / {schedules.length}, Puntaje {schedules[index]?.score ?? 0}
 					</Col>
 					<Col>
 						<ButtonGroup className="mx-2 float-end" size="sm">
@@ -50,10 +50,8 @@ const ToolBar = () => {
 			</div>
 			{curses.map(curse => {
 				const schedule = schedules[index];
-				if (schedule === undefined) return null;
-				const nrc = schedule.nrcs.find(nrc => nrc.curse === curse.curse);
-				if (nrc === undefined) return null;
-				return <Curse nrc={nrc} key={nrc.nrc} curse={curse} />;
+				const nrc = schedule?.nrcs.find(nrc => nrc.curse === curse.curse);
+				return <Curse nrc={nrc} key={nrc?.nrc ?? `${curse.curse}-no-nrc` } curse={curse} />;
 			})}
 			<ProyeccionModal isOpen={isOpen} toggle={toggle} />
 		</div>
