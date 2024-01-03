@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Day, Hour } from "../containers/Cell";
-import useCalcAllshcedules from "./useCalcAllshcedules";
+import useCalcAllschedules from "./useCalcAllschedules";
 import { useStore } from "../data/useStore";
 
 interface ScheduleCell {
@@ -13,7 +13,7 @@ interface ScheduleCell {
 
 const useGetSchedule = () => {
 	const [schedule, setSchedule] = useState<ScheduleCell[]>([]);
-	const schedules = useCalcAllshcedules();
+	const schedules = useCalcAllschedules();
 	const index = useStore(state => state.index);
 	const setSchedules = useStore(state => state.setSchedules);
 
@@ -23,12 +23,12 @@ const useGetSchedule = () => {
 		const schedule = schedules[index];
 		console.log(schedules)
 		const cells = schedule.nrcs.flatMap(nrc => {
-			return nrc.shcedules.map(sch => ({
+			return nrc.schedules.map(sch => ({
 				day: sch.day,
 				start: sch.start,
 				end: sch.end,
 				nrc: nrc.name,
-				label: (
+				label: sch.classroom !== "" ? (
 					<>
 						<p style={{ margin: 0 }}>
 							<b>{nrc.name}</b>
@@ -39,7 +39,7 @@ const useGetSchedule = () => {
 							{sch.classroom}
 						</p>
 					</>
-				),
+				) : <></>,
 			}));
 		});
 		setSchedule(cells);

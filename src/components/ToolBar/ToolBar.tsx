@@ -1,9 +1,15 @@
 import { Button, ButtonGroup, Col, Row } from "reactstrap";
-import appStyle from "../assets/css/app.module.css";
-import { useStore } from "../data/useStore";
-import Curse from "./Curse/Curse";
+import appStyle from "../../assets/css/app.module.css";
+import { useStore } from "../../data/useStore";
+import Curse from "../Curse/Curse";
 import { useState } from "react";
 import ProyeccionModal from "./ProyeccionModal";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+	faCalendarDays,
+	faCaretLeft,
+	faCaretRight,
+} from "@fortawesome/free-solid-svg-icons";
 
 const ToolBar = () => {
 	const increase = useStore(state => state.increase);
@@ -20,21 +26,21 @@ const ToolBar = () => {
 		<div className={[appStyle.toolBar, appStyle.shadow].join(" ")}>
 			<div className={appStyle["toolBar-header"]}>
 				<Row>
-					<Col md="12" className="mb-2">
-						<Button color="primary" onClick={() => toggle()}>
-							Mi Proyeccion
+					<Col md="7">
+						<Button color="primary" size="sm" onClick={() => toggle()}>
+							<FontAwesomeIcon icon={faCalendarDays} /> Mi Proyeccion
 						</Button>
 					</Col>
-					<Col>
-						Horario {index + 1} / {schedules.length}, Puntaje {schedules[index]?.score ?? 0}
-					</Col>
-					<Col>
-						<ButtonGroup className="mx-2 float-end" size="sm">
+					<Col className="d-flex justify-content-end">
+						<span>
+							{index + 1} / {schedules.length}
+						</span>
+						<ButtonGroup className="mx-2" size="sm">
 							<Button color="primary" onClick={() => decrease(1)}>
-								-
+								<FontAwesomeIcon icon={faCaretLeft} />
 							</Button>
 							<Button color="primary" onClick={() => increase(1)}>
-								+
+								<FontAwesomeIcon icon={faCaretRight} />
 							</Button>
 						</ButtonGroup>
 					</Col>
@@ -51,7 +57,7 @@ const ToolBar = () => {
 			{curses.map(curse => {
 				const schedule = schedules[index];
 				const nrc = schedule?.nrcs.find(nrc => nrc.curse === curse.curse);
-				return <Curse nrc={nrc} key={nrc?.nrc ?? `${curse.curse}-no-nrc` } curse={curse} />;
+				return <Curse nrc={nrc} key={curse.curse} curse={curse} />;
 			})}
 			<ProyeccionModal isOpen={isOpen} toggle={toggle} />
 		</div>

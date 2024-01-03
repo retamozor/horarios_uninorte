@@ -3,9 +3,14 @@ import { FC, useMemo, useState } from "react";
 import { Curse, Nrc } from "../../hooks/useMapData";
 import { useStore } from "../../data/useStore";
 import { randomLightColor } from "seed-to-color";
-import { Row, Col, Button, ButtonGroup, Collapse } from "reactstrap";
+import { Row, Col, Button, ButtonGroup, Collapse, Tooltip } from "reactstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronDown, faFilter } from "@fortawesome/free-solid-svg-icons";
+import {
+	faCaretLeft,
+	faCaretRight,
+	faChevronDown,
+	faFilter,
+} from "@fortawesome/free-solid-svg-icons";
 import FiltersModal from "./FiltersModal";
 
 interface CurseProps {
@@ -16,10 +21,13 @@ const Curse: FC<CurseProps> = ({ nrc, curse }) => {
 	const schedules = useStore(state => state.schedules);
 	const index = useStore(state => state.index);
 	const setIndex = useStore(state => state.setIndex);
-	const filterCurses = useStore(state => state.filterCurses);
+	const filteredCurses = useStore(state => state.filteredCurses);
 	const [open, setOpen] = useState(false);
 	const [filtersOpen, setFiltersOpen] = useState(false);
+	const [tooltipOpen, setTooltipOpen] = useState(false);
+	
 	const toggle = () => setOpen(o => !o);
+	const toggleTooltip = () => setTooltipOpen(!tooltipOpen);
 
 	const availableSch = useMemo(() => {
 		const filters = schedules[index]?.nrcs
@@ -41,7 +49,7 @@ const Curse: FC<CurseProps> = ({ nrc, curse }) => {
 		avl => avl.id === schedules[index]?.id
 	);
 
-	const nrcs = filterCurses.find(c => c.curse === curse.curse)?.nrcs ?? []
+	const nrcs = filteredCurses.find(c => c.curse === curse.curse)?.nrcs ?? [];
 
 	return (
 		<div
@@ -65,7 +73,7 @@ const Curse: FC<CurseProps> = ({ nrc, curse }) => {
 							}}
 							disabled={currIdx === 0}
 						>
-							-
+							<FontAwesomeIcon icon={faCaretLeft} />
 						</Button>
 						<Button
 							color="primary"
@@ -74,7 +82,7 @@ const Curse: FC<CurseProps> = ({ nrc, curse }) => {
 							}}
 							disabled={currIdx + 1 === availableSch.length}
 						>
-							+
+							<FontAwesomeIcon icon={faCaretRight} />
 						</Button>
 					</ButtonGroup>
 				</Col>
@@ -92,12 +100,12 @@ const Curse: FC<CurseProps> = ({ nrc, curse }) => {
 								border: "none",
 							}}
 							onClick={() => {
-								if (curseNrc.nrc === nrc?.nrc) return
+								if (curseNrc.nrc === nrc?.nrc) return;
 								const newIndex = schedules.findIndex(sch =>
 									sch.nrcs.some(schNrc => schNrc.nrc === curseNrc.nrc)
 								);
-								if (newIndex === -1) return
-								setIndex(newIndex)
+								if (newIndex === -1) return;
+								setIndex(newIndex);
 							}}
 						>
 							{curseNrc.nrc}
@@ -106,11 +114,26 @@ const Curse: FC<CurseProps> = ({ nrc, curse }) => {
 				</Col>
 				<Col md={3} className="mb-2">
 					<ButtonGroup className="mx-2  float-end" size="sm">
-						<Button size="sm" color="primary">
-							<FontAwesomeIcon icon={faFilter} onClick={() => setFiltersOpen(true)} />
+						<Button
+							size="sm"
+							color="primary"
+							id={curse.curse}
+							onClick={() => setFiltersOpen(true)}
+						>
+							<FontAwesomeIcon icon={faFilter} />
 						</Button>
+						<Tooltip
+							isOpen={tooltipOpen}
+							target={curse.curse}
+							toggle={toggleTooltip}
+						>
+							Filtrar profesores
+						</Tooltip>
 						<Button size="sm" color="primary" onClick={toggle}>
-							<FontAwesomeIcon icon={faChevronDown} />
+							<FontAwesomeIcon
+								icon={faChevronDown}
+								rotation={open ? 180 : undefined}
+							/>
 						</Button>
 					</ButtonGroup>
 				</Col>
@@ -118,19 +141,23 @@ const Curse: FC<CurseProps> = ({ nrc, curse }) => {
 			<Collapse isOpen={open}>
 				<div className={appStyle.shadow}>
 					<p style={{ margin: 0 }}>
-						<b>profesor: </b> {nrc?.teacher ?? ''}
+						<b>profesor: </b> {nrc?.teacher ?? ""}
 					</p>
 					<p style={{ margin: 0 }}>
 						<b>nrc: </b>
-						{nrc?.nrc ?? ''}
+						{nrc?.nrc ?? ""}
 					</p>
 					<p style={{ margin: 0 }}>
 						<b>disponible: </b>
-						{nrc?.available ?? ''}
+						{nrc?.available ?? ""}
 					</p>
 				</div>
 			</Collapse>
-			<FiltersModal isOpen={filtersOpen} toggle={() => setFiltersOpen(false)} curse={curse} />
+			<FiltersModal
+				isOpen={filtersOpen}
+				toggle={() => setFiltersOpen(false)}
+				curse={curse}
+			/>
 		</div>
 	);
 };

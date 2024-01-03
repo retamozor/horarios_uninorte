@@ -31,7 +31,7 @@ const FiltersModal: FC<FiltersModalModalProps> = ({
 	const filter = useStore(state => state.filter);
 	const setFilter = useStore(state => state.setFilter);
 	const curses = useStore(state => state.curses);
-  const originalCurse = curses.find(c => c.curse === curse.curse)!
+	const originalCurse = curses.find(c => c.curse === curse.curse)!;
 
 	const teachers = useMemo(() => {
 		const teacherNames = Array.from(
@@ -51,7 +51,8 @@ const FiltersModal: FC<FiltersModalModalProps> = ({
 		return originalCurse.nrcs.map(nrc => ({
 			...nrc,
 			active:
-				filter[originalCurse.curse]?.find(nrc2 => nrc2.nrc === nrc.nrc)?.active ?? true,
+				filter[originalCurse.curse]?.find(nrc2 => nrc2.nrc === nrc.nrc)
+					?.active ?? true,
 		}));
 	}, [filter]);
 
@@ -111,15 +112,18 @@ const FiltersModal: FC<FiltersModalModalProps> = ({
 									<p className="mb-2">
 										<b>Cursos</b>
 									</p>
-									{values.nrcs
-										.filter(
-											nrc =>
-												values.teachers.find(
-													teacher => teacher.name === nrc.teacher
-												)?.active ?? false
-										)
-										.map((nrc, i) => (
-											<div key={nrc.nrc} className={`${appStyle.shadow} mb-2`}>
+									{values.nrcs.map((nrc, i) =>
+										values.teachers.find(
+											teacher => teacher.name === nrc.teacher
+										)?.active ?? false ? (
+											<div
+												onClick={() =>
+													setFieldValue(`nrcs.${i}.active`, !nrc.active)
+												}
+												key={nrc.nrc}
+												className={`${appStyle.shadow} mb-2`}
+												style={{ cursor: "pointer" }}
+											>
 												<Row>
 													<Col md="9">
 														<b>profesor: </b> {nrc.teacher}
@@ -149,7 +153,7 @@ const FiltersModal: FC<FiltersModalModalProps> = ({
 													</Col>
 													<Col md="12">
 														<b>Horario: </b>
-														{nrc.shcedules.map(sch => (
+														{nrc.schedules.map(sch => (
 															<Badge
 																key={`${sch.day}${sch.start}${sch.end}`}
 																className="mx-1"
@@ -160,12 +164,21 @@ const FiltersModal: FC<FiltersModalModalProps> = ({
 													</Col>
 												</Row>
 											</div>
-										))}
+										) : null
+									)}
 								</Col>
 							</Row>
 						</ModalBody>
 						<ModalFooter>
-							<Button type="submit" onClick={() => {}}>
+							<Button
+								type="button"
+								onClick={() => {
+									toggle();
+								}}
+							>
+								Cancelar
+							</Button>
+							<Button color="primary" type="submit">
 								Guardar
 							</Button>
 						</ModalFooter>

@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { Schedule } from "../hooks/useCalcAllshcedules";
+import { Schedule } from "../hooks/useCalcAllschedules";
 import { Curse } from "../hooks/useMapData";
 import { Proyeccion } from "../hooks/useProyeccion";
 
@@ -17,10 +17,11 @@ interface State {
 	index: number;
 	schedules: Schedule[];
 	curses: Curse[];
-	filterCurses: Curse[];
+	filteredCurses: Curse[];
 	proyeccion: Proyeccion[];
 	selectedCurses: Proyeccion[];
 	filter: FilterCurses;
+	filterSchedule: Curse;
 	setMax: (by: number) => void;
 	increase: (by: number) => void;
 	decrease: (by: number) => void;
@@ -31,6 +32,7 @@ interface State {
 	setProyeccion: (proyeccion: Proyeccion[]) => void;
 	setSelectedCurses: (selectedCurses: Proyeccion[]) => void;
 	setFilter: (curse: string, value: Filter[]) => void;
+	setFilterSchedule: (filterSchedule: Curse) => void;
 }
 
 interface HorUN {
@@ -49,10 +51,26 @@ export const useStore = create<State>()((set, get) => ({
 	index: 0,
 	schedules: [],
 	curses: [],
-	filterCurses: [],
+	filteredCurses: [],
 	proyeccion: [],
 	selectedCurses: [],
 	filter: {},
+	filterSchedule: {
+		curse: "",
+		name: "",
+		nrcs: [
+			{
+				available: 0,
+				capacity: 0,
+				curse: "",
+				name: "",
+				nrc: "",
+				taken: 0,
+				teacher: "",
+				schedules: [],
+			},
+		],
+	},
 	setMax: by => {
 		if (by < 0) {
 			set({ max: 0 });
@@ -77,7 +95,7 @@ export const useStore = create<State>()((set, get) => ({
 			return { index };
 		}),
 	setSchedules: schedules => set({ schedules }),
-	setCurses: curses => set({ curses, filterCurses: curses, filter: {} }),
+	setCurses: curses => set({ curses, filteredCurses: curses, filter: {} }),
 	getHorun: () =>
 		JSON.parse(
 			localStorage.getItem("horun") ??
@@ -87,7 +105,7 @@ export const useStore = create<State>()((set, get) => ({
 	setSelectedCurses: selectedCurses => set({ selectedCurses }),
 	setFilter: (curse, value) => {
 		const filter = { ...get().filter, [curse]: value };
-		const filterCurses = get().curses.map(curse => {
+		const filteredCurses = get().curses.map(curse => {
 			const filterNRC = filter[curse.curse];
 			return {
 				...curse,
@@ -96,6 +114,7 @@ export const useStore = create<State>()((set, get) => ({
 				),
 			};
 		});
-		set({ filter, filterCurses });
+		set({ filter, filteredCurses });
 	},
+	setFilterSchedule: (filterSchedule) => set({filterSchedule})
 }));

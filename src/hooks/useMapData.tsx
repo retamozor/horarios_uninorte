@@ -17,7 +17,7 @@ export interface Nrc {
 	capacity: number;
 	taken: number;
 	available: number;
-	shcedules: Schedule[];
+	schedules: Schedule[];
 }
 
 interface Schedule {
@@ -47,7 +47,7 @@ const useMapData = () => {
 						capacity: nrc.CAPACIDAD,
 						taken: nrc.OCUPADO,
 						available: nrc.DISPONIBLES,
-						shcedules: nrc.DIAS.split("/").map((day, i) => ({
+						schedules: nrc.DIAS.split("/").map((day, i) => ({
 							day: day as Day,
 							start: nrc.HORAS.split("/")[i].split("_")[0].slice(0, 2) as Hour,
 							end: nrc.HORAS.split("/")[i].split("_")[1].slice(0, 2) as Hour,

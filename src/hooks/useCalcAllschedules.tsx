@@ -9,12 +9,13 @@ export interface Schedule {
 	nrcs: Nrc[];
 }
 
-const useCalcAllshcedules = () => {
+const useCalcAllschedules = () => {
 	useMapData();
 	const [schedules, setSchedules] = useState<Schedule[]>([]);
-	const filterCurses = useStore(state => state.filterCurses);
+	const filteredCurses = useStore(state => state.filteredCurses);
 	const setIndex = useStore(state => state.setIndex);
 	const setMax = useStore(state => state.setMax);
+	const filterSchedule = useStore(state => state.filterSchedule);
 
 	const combine = (curses: Curse[]): Schedule[] => {
 		const curse = curses.pop();
@@ -36,8 +37,8 @@ const useCalcAllshcedules = () => {
 		const nrcs = schedule.nrcs;
 		for (let i = 0; i < nrcs.length - 1; i++) {
 			for (let j = i + 1; j < nrcs.length; j++) {
-				const conflict = nrcs[i].shcedules.some(sch1 => {
-					return nrcs[j].shcedules.some(sch2 => {
+				const conflict = nrcs[i].schedules.some(sch1 => {
+					return nrcs[j].schedules.some(sch2 => {
 						if (sch1.day !== sch2.day) return false;
 						if (Number(sch1.start) >= Number(sch2.end)) return false;
 						if (Number(sch1.end) <= Number(sch2.start)) return false;
@@ -53,7 +54,7 @@ const useCalcAllshcedules = () => {
 	const calcScore = (schedule: Schedule) => {
 		// console.log(schedule);
 		const days: {
-			[key: string]: Nrc["shcedules"];
+			[key: string]: Nrc["schedules"];
 		} = {
 			M: [],
 			T: [],
@@ -63,7 +64,7 @@ const useCalcAllshcedules = () => {
 			S: [],
 		};
 		schedule.nrcs.forEach(nrc => {
-			nrc.shcedules.forEach(sch => {
+			nrc.schedules.forEach(sch => {
 				days[sch.day].push(sch);
 			});
 		});
@@ -78,7 +79,7 @@ const useCalcAllshcedules = () => {
 				schedule.score += 10;
 				return;
 			}
-			const newsch: Nrc["shcedules"] = [];
+			const newsch: Nrc["schedules"] = [];
 			let curr = { ...days[key][0] };
 
 			days[key].forEach((sch, i) => {
@@ -101,15 +102,16 @@ const useCalcAllshcedules = () => {
 	};
 
 	useEffect(() => {
-		const newSchedules = combine(
-			filterCurses.filter(curse => curse.nrcs.length !== 0)
-		).filter(sch => !haveConflict(sch));
+		const newSchedules = combine([
+			...filteredCurses.filter(curse => curse.nrcs.length !== 0),
+			filterSchedule,
+		]).filter(sch => !haveConflict(sch));
 		setMax(newSchedules.length - 1);
 		setIndex(0);
 		newSchedules.forEach(calcScore);
 		setSchedules(newSchedules.sort((a, b) => b.score - a.score));
-	}, [filterCurses]);
+	}, [filteredCurses, filterSchedule]);
 	return schedules;
 };
 
-export default useCalcAllshcedules;
+export default useCalcAllschedules;

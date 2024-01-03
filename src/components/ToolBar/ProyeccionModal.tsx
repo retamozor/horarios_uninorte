@@ -1,8 +1,10 @@
 import { FC, useState } from "react";
 import { Button, Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
-import { useStore } from "../data/useStore";
+import { useStore } from "../../data/useStore";
 import Select, { MultiValue } from "react-select";
-import { Proyeccion } from "../hooks/useProyeccion";
+import { Proyeccion } from "../../hooks/useProyeccion";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCalendarDays } from "@fortawesome/free-solid-svg-icons";
 
 interface ProyeccionModalProps {
 	isOpen: boolean;
@@ -19,9 +21,10 @@ const ProyeccionModal: FC<ProyeccionModalProps> = ({ isOpen, toggle }) => {
 	return (
 		<Modal toggle={toggle} isOpen={isOpen}>
 			<ModalHeader toggle={toggle}>
-				Mi proyección - {getHorun().periodo}
+			<FontAwesomeIcon icon={faCalendarDays} /> Mi proyección - {getHorun().periodo}
 			</ModalHeader>
 			<ModalBody>
+				<p><b>Total creditos: </b>{value?.reduce((prev, curr) => prev + curr.CREDITOS, 0)}</p>
 				<Select
 					options={proyeccion}
 					getOptionLabel={opt =>
@@ -35,6 +38,14 @@ const ProyeccionModal: FC<ProyeccionModalProps> = ({ isOpen, toggle }) => {
 			</ModalBody>
 			<ModalFooter>
 				<Button
+					onClick={() => {
+						toggle();
+					}}
+				>
+					Cancelar
+				</Button>
+				<Button
+					color="primary"
 					onClick={() => {
 						toggle();
             setSelectedCurses(value.map(val => val))
