@@ -75,3 +75,12 @@ body {
 		[h-18] minmax(min-content, 1fr)
 		[h-19] minmax(min-content, 1fr) [h-20];
 }
+
+@media screen and (width <= 768px) {
+	.layout {
+		grid-template-columns: 1fr;
+		grid-template-rows: auto auto;
+		height: auto;
+	}
+
+}

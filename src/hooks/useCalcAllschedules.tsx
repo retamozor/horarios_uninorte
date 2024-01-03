@@ -52,7 +52,6 @@ const useCalcAllschedules = () => {
 	};
 
 	const calcScore = (schedule: Schedule) => {
-		// console.log(schedule);
 		const days: {
 			[key: string]: Nrc["schedules"];
 		} = {

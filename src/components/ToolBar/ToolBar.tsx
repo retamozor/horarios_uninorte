@@ -1,4 +1,4 @@
-import { Button, ButtonGroup, Col, Row } from "reactstrap";
+import { Button, ButtonGroup, Col, Row, UncontrolledTooltip } from "reactstrap";
 import appStyle from "../../assets/css/app.module.css";
 import { useStore } from "../../data/useStore";
 import Curse from "../Curse/Curse";
@@ -6,6 +6,7 @@ import { useState } from "react";
 import ProyeccionModal from "./ProyeccionModal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
+	faAnglesDown,
 	faCalendarDays,
 	faCaretLeft,
 	faCaretRight,
@@ -21,19 +22,21 @@ const ToolBar = () => {
 	const [isOpen, setIsOpen] = useState(false);
 	const toggle = () => setIsOpen(o => !o);
 
-	// console.clear();
+	const [expand, setExpand] = useState(false);
+	const toggleExpand = () => setExpand(e => !e);
+
 	return (
 		<div className={[appStyle.toolBar, appStyle.shadow].join(" ")}>
 			<div className={appStyle["toolBar-header"]}>
 				<Row>
-					<Col md="7">
+					<Col xs="6">
 						<Button color="primary" size="sm" onClick={() => toggle()}>
 							<FontAwesomeIcon icon={faCalendarDays} /> Mi Proyeccion
 						</Button>
 					</Col>
 					<Col className="d-flex justify-content-end">
 						<span>
-							{index + 1} / {schedules.length}
+							{schedules.findIndex((_, i) => i === index) + 1} / {schedules.length}
 						</span>
 						<ButtonGroup className="mx-2" size="sm">
 							<Button color="primary" onClick={() => decrease(1)}>
@@ -43,6 +46,21 @@ const ToolBar = () => {
 								<FontAwesomeIcon icon={faCaretRight} />
 							</Button>
 						</ButtonGroup>
+						<Button id="expand" size="sm" color="primary" onClick={() => toggleExpand()}>
+							<FontAwesomeIcon
+								icon={faAnglesDown}
+								rotation={expand ? 180 : undefined}
+							/>
+						</Button>
+						<UncontrolledTooltip
+							target="expand"
+							delay={{
+								hide: 200,
+								show: 1000
+							}}
+						>
+							{expand ? 'Contraer todo' : 'Expandir todo'}
+						</UncontrolledTooltip>
 					</Col>
 				</Row>
 
@@ -57,7 +75,7 @@ const ToolBar = () => {
 			{curses.map(curse => {
 				const schedule = schedules[index];
 				const nrc = schedule?.nrcs.find(nrc => nrc.curse === curse.curse);
-				return <Curse nrc={nrc} key={curse.curse} curse={curse} />;
+				return <Curse expand={expand} nrc={nrc} key={curse.curse} curse={curse} />;
 			})}
 			<ProyeccionModal isOpen={isOpen} toggle={toggle} />
 		</div>

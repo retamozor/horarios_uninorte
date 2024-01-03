@@ -5,6 +5,8 @@ import Cell, { Day, Hour } from "../../containers/Cell";
 import { Form, Formik } from "formik";
 import { useStore } from "../../data/useStore";
 import { Nrc } from "../../hooks/useMapData";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faFilterCircleXmark } from "@fortawesome/free-solid-svg-icons";
 
 interface FilterModalModalProps {
 	isOpen: boolean;
@@ -37,7 +39,7 @@ const FilterModal: FC<FilterModalModalProps> = ({
 				}}
 				onSubmit={values => {
 					setFilterSchedule(values);
-          toggle();
+					toggle();
 				}}
 			>
 				{({ values, setFieldValue }) => {
@@ -51,7 +53,6 @@ const FilterModal: FC<FilterModalModalProps> = ({
 						const index = schedules.findIndex(
 							sch => sch.day === day && sch.start === start && sch.end === end
 						);
-						console.log({ day, start, end, value, index });
 						if (index !== -1) {
 							if (value !== undefined && value) return schedules;
 							return schedules.filter((_, i) => i !== index);
@@ -69,12 +70,19 @@ const FilterModal: FC<FilterModalModalProps> = ({
 					};
 					return (
 						<Form>
-							<ModalHeader toggle={toggle}></ModalHeader>
+							<ModalHeader toggle={toggle}>
+                Filtro por hora y dia
+              </ModalHeader>
 							<ModalBody>
 								<div
 									style={{ maxHeight: "66vh" }}
 									className={[appStyle.weekLayout, appStyle.shadow].join(" ")}
 								>
+									<Cell day="H" start="week" end="week" toolTip="Limpiar filtros" onClick={() => {
+                    setFieldValue("nrcs.0.schedules", []);
+                  }}>
+										<FontAwesomeIcon size="2x" icon={faFilterCircleXmark} />
+									</Cell>
 									{days.map(({ day, label }) => (
 										<Cell
 											key={day}
@@ -114,7 +122,7 @@ const FilterModal: FC<FilterModalModalProps> = ({
 											start={start}
 											end={end}
 											toolTip={label}
-                      onClick={() => {
+											onClick={() => {
 												const activate = days.every(({ day }) =>
 													values.nrcs[0].schedules.some(
 														sch =>
@@ -169,10 +177,12 @@ const FilterModal: FC<FilterModalModalProps> = ({
 								</div>
 							</ModalBody>
 							<ModalFooter>
-								<Button type="button" onClick={toggle}>
+								<Button color="danger" type="button" onClick={toggle}>
 									Cancelar
 								</Button>
-								<Button color="primary" type="submit">Guardar</Button>
+								<Button color="primary" type="submit">
+									Guardar
+								</Button>
 							</ModalFooter>
 						</Form>
 					);

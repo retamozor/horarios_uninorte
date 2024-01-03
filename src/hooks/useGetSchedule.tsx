@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Day, Hour } from "../containers/Cell";
 import useCalcAllschedules from "./useCalcAllschedules";
 import { useStore } from "../data/useStore";
+import { Nrc } from "./useMapData";
 
 interface ScheduleCell {
 	day: Day;
@@ -16,13 +17,17 @@ const useGetSchedule = () => {
 	const schedules = useCalcAllschedules();
 	const index = useStore(state => state.index);
 	const setSchedules = useStore(state => state.setSchedules);
+	const filterSchedule = useStore(state => state.filterSchedule);
 
 	useEffect(() => {
 		setSchedules(schedules)
-		if (schedules.length === 0) return;
-		const schedule = schedules[index];
-		console.log(schedules)
-		const cells = schedule.nrcs.flatMap(nrc => {
+		let nrcs: Nrc[];
+		if (schedules.length === 0) {
+			nrcs = filterSchedule.nrcs
+		} else {
+			nrcs = schedules[index].nrcs
+		}
+		const cells = nrcs.flatMap(nrc => {
 			return nrc.schedules.map(sch => ({
 				day: sch.day,
 				start: sch.start,

@@ -1,9 +1,16 @@
 import appStyle from "../../assets/css/app.module.css";
-import { FC, useMemo, useState } from "react";
+import { FC, useEffect, useMemo, useState } from "react";
 import { Curse, Nrc } from "../../hooks/useMapData";
 import { useStore } from "../../data/useStore";
 import { randomLightColor } from "seed-to-color";
-import { Row, Col, Button, ButtonGroup, Collapse, Tooltip } from "reactstrap";
+import {
+	Row,
+	Col,
+	Button,
+	ButtonGroup,
+	Collapse,
+	UncontrolledTooltip,
+} from "reactstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
 	faCaretLeft,
@@ -16,18 +23,17 @@ import FiltersModal from "./FiltersModal";
 interface CurseProps {
 	nrc?: Nrc;
 	curse: Curse;
+	expand: boolean;
 }
-const Curse: FC<CurseProps> = ({ nrc, curse }) => {
+const Curse: FC<CurseProps> = ({ nrc, curse, expand }) => {
 	const schedules = useStore(state => state.schedules);
 	const index = useStore(state => state.index);
 	const setIndex = useStore(state => state.setIndex);
 	const filteredCurses = useStore(state => state.filteredCurses);
 	const [open, setOpen] = useState(false);
 	const [filtersOpen, setFiltersOpen] = useState(false);
-	const [tooltipOpen, setTooltipOpen] = useState(false);
-	
+
 	const toggle = () => setOpen(o => !o);
-	const toggleTooltip = () => setTooltipOpen(!tooltipOpen);
 
 	const availableSch = useMemo(() => {
 		const filters = schedules[index]?.nrcs
@@ -51,6 +57,10 @@ const Curse: FC<CurseProps> = ({ nrc, curse }) => {
 
 	const nrcs = filteredCurses.find(c => c.curse === curse.curse)?.nrcs ?? [];
 
+	useEffect(() => {
+		setOpen(expand);
+	}, [expand]);
+
 	return (
 		<div
 			className={appStyle.shadow}
@@ -60,12 +70,12 @@ const Curse: FC<CurseProps> = ({ nrc, curse }) => {
 			}}
 		>
 			<Row>
-				<Col md={8} className="mb-2">
+				<Col sm={8} className="mb-2">
 					<b>{curse.name}</b>
 				</Col>
-				<Col md={4} className="mb-2">
+				<Col sm={4} className="d-flex justify-content-end mb-2">
 					{currIdx + 1} / {availableSch.length}
-					<ButtonGroup className="mx-2  float-end" size="sm">
+					<ButtonGroup className="mx-2" size="sm">
 						<Button
 							color="primary"
 							onClick={() => {
@@ -86,19 +96,23 @@ const Curse: FC<CurseProps> = ({ nrc, curse }) => {
 						</Button>
 					</ButtonGroup>
 				</Col>
-				<Col md={9} className="mb-2">
+				<Col xs={9} className="mb-2">
 					{nrcs.map(curseNrc => (
 						<Button
 							key={curseNrc.nrc}
 							className="mx-1"
 							size="sm"
+							color="primary"
+							active={curseNrc.nrc === nrc?.nrc}
 							style={{
 								borderRadius: "50rem",
 								display: "inline-block",
-								background: curseNrc.nrc === nrc?.nrc ? "#0a58ca" : "#0d6efd",
 								padding: "0.1rem 0.5rem",
 								border: "none",
 							}}
+							disabled={!schedules.some(sch =>
+								sch.nrcs.some(schNrc => schNrc.nrc === curseNrc.nrc)
+							)}
 							onClick={() => {
 								if (curseNrc.nrc === nrc?.nrc) return;
 								const newIndex = schedules.findIndex(sch =>
@@ -112,28 +126,44 @@ const Curse: FC<CurseProps> = ({ nrc, curse }) => {
 						</Button>
 					))}
 				</Col>
-				<Col md={3} className="mb-2">
+				<Col xs={3} className="mb-2">
 					<ButtonGroup className="mx-2  float-end" size="sm">
 						<Button
 							size="sm"
 							color="primary"
-							id={curse.curse}
+							id={`${curse.curse}-filter`}
 							onClick={() => setFiltersOpen(true)}
 						>
 							<FontAwesomeIcon icon={faFilter} />
 						</Button>
-						<Tooltip
-							isOpen={tooltipOpen}
-							target={curse.curse}
-							toggle={toggleTooltip}
+						<UncontrolledTooltip
+							target={`${curse.curse}-filter`}
+							delay={{
+								hide: 200,
+								show: 1000,
+							}}
 						>
 							Filtrar profesores
-						</Tooltip>
-						<Button size="sm" color="primary" onClick={toggle}>
+						</UncontrolledTooltip>
+						<Button
+							id={`${curse.curse}-expand`}
+							size="sm"
+							color="primary"
+							onClick={toggle}
+						>
 							<FontAwesomeIcon
 								icon={faChevronDown}
 								rotation={open ? 180 : undefined}
 							/>
+							<UncontrolledTooltip
+								target={`${curse.curse}-expand`}
+								delay={{
+									hide: 200,
+									show: 1000,
+								}}
+							>
+								{open ? "Contraer" : "Expandir"}
+							</UncontrolledTooltip>
 						</Button>
 					</ButtonGroup>
 				</Col>

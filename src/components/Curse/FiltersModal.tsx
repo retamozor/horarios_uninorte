@@ -172,6 +172,7 @@ const FiltersModal: FC<FiltersModalModalProps> = ({
 						<ModalFooter>
 							<Button
 								type="button"
+								color="danger"
 								onClick={() => {
 									toggle();
 								}}

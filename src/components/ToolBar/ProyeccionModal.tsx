@@ -17,14 +17,17 @@ const ProyeccionModal: FC<ProyeccionModalProps> = ({ isOpen, toggle }) => {
 	const setSelectedCurses = useStore(state => state.setSelectedCurses);
 	const [value, setValue] = useState<MultiValue<Proyeccion>>([]);
 
-
 	return (
 		<Modal toggle={toggle} isOpen={isOpen}>
 			<ModalHeader toggle={toggle}>
-			<FontAwesomeIcon icon={faCalendarDays} /> Mi proyección - {getHorun().periodo}
+				<FontAwesomeIcon icon={faCalendarDays} /> Mi proyección -{" "}
+				{getHorun().periodo}
 			</ModalHeader>
 			<ModalBody>
-				<p><b>Total creditos: </b>{value?.reduce((prev, curr) => prev + curr.CREDITOS, 0)}</p>
+				<p>
+					<b>Total creditos: </b>
+					{value?.reduce((prev, curr) => prev + curr.CREDITOS, 0)}
+				</p>
 				<Select
 					options={proyeccion}
 					getOptionLabel={opt =>
@@ -38,6 +41,7 @@ const ProyeccionModal: FC<ProyeccionModalProps> = ({ isOpen, toggle }) => {
 			</ModalBody>
 			<ModalFooter>
 				<Button
+					color="danger"
 					onClick={() => {
 						toggle();
 					}}
@@ -48,7 +52,7 @@ const ProyeccionModal: FC<ProyeccionModalProps> = ({ isOpen, toggle }) => {
 					color="primary"
 					onClick={() => {
 						toggle();
-            setSelectedCurses(value.map(val => val))
+						setSelectedCurses(value.map(val => val));
 					}}
 				>
 					guardar
