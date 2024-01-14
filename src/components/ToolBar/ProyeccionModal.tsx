@@ -49,13 +49,13 @@ const ProyeccionModal: FC<ProyeccionModalProps> = ({ isOpen, toggle }) => {
 					Cancelar
 				</Button>
 				<Button
-					color="primary"
+					color="success"
 					onClick={() => {
 						toggle();
 						setSelectedCurses(value.map(val => val));
 					}}
 				>
-					guardar
+					Guardar
 				</Button>
 			</ModalFooter>
 		</Modal>

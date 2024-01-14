@@ -63,6 +63,8 @@ const useCalcAllschedules = () => {
 			S: [],
 		};
 		schedule.nrcs.forEach(nrc => {
+			//penalizacion por no tener cupos
+			schedule.score += nrc.available === 0 ? -25 : 0; 
 			nrc.schedules.forEach(sch => {
 				days[sch.day].push(sch);
 			});
@@ -70,17 +72,20 @@ const useCalcAllschedules = () => {
 
 		Object.keys(days).forEach(key => {
 			days[key] = days[key].sort((a, b) => Number(a.start) - Number(b.start));
+			// puntaje por inicio y fin de clases
 			schedule.score +=
 				Number(days[key][0]?.start ?? "20") -
 				Number(days[key][days[key].length - 1]?.end ?? "06") +
 				14;
+			// puntaje por dia libre
 			if (days[key].length === 0) {
 				schedule.score += 10;
 				return;
 			}
+
+			// juntar classes seguidas
 			const newsch: Nrc["schedules"] = [];
 			let curr = { ...days[key][0] };
-
 			days[key].forEach((sch, i) => {
 				if (i === 0) return;
 				if (curr.end === sch.start) {
@@ -92,6 +97,7 @@ const useCalcAllschedules = () => {
 			});
 			newsch.push(curr);
 
+			// puntaje por horas libres
 			newsch.forEach((sch, i) => {
 				schedule.score += 14 - Number(sch.end) + Number(sch.start);
 				if (i === 0) return;

@@ -20,7 +20,9 @@ specifiers:
   formik: ^2.4.5
   react: ^18.2.0
   react-dom: ^18.2.0
+  react-router-dom: ^6.21.1
   react-select: ^5.8.0
+  react-toastify: ^9.1.3
   reactstrap: ^9.2.1
   seed-to-color: ^1.0.4
   typescript: ^5.2.2
@@ -34,13 +36,14 @@ dependencies:
   '@fortawesome/free-solid-svg-icons': 6.5.1
   '@fortawesome/react-fontawesome': 0.2.0_aftyofkicdoqjnxx422t7kpqoi
   '@popperjs/core': 2.11.8
-  '@types/uuid': 9.0.7
   axios: 1.6.3
   bootstrap: 5.3.2_@popperjs+core@2.11.8
   formik: 2.4.5_react@18.2.0
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
+  react-router-dom: 6.21.1_biqbaboplfbrettd7655fr4n2y
   react-select: 5.8.0_yok4whjnfjlfyjmdmcaku5uzjq
+  react-toastify: 9.1.3_biqbaboplfbrettd7655fr4n2y
   reactstrap: 9.2.1_biqbaboplfbrettd7655fr4n2y
   seed-to-color: 1.0.4
   uuid: 9.0.1
@@ -49,6 +52,7 @@ dependencies:
 devDependencies:
   '@types/react': 18.2.46
   '@types/react-dom': 18.2.18
+  '@types/uuid': 9.0.7
   '@typescript-eslint/eslint-plugin': 6.16.0_bzmrvv2elrxwu6gm3fkk6yklke
   '@typescript-eslint/parser': 6.16.0_xdgzedli73k7lw4xlyzszm74om
   '@vitejs/plugin-react-swc': 3.5.0_vite@5.0.10
@@ -551,6 +555,11 @@ packages:
     resolution: {integrity: sha512-P1st0aksCrn9sGZhp8GMYwBnQsbvAWsZAX44oXNNvLHGqAOcoVxmjZiohstwQ7SqKnbR47akdNi+uleWD8+g6A==}
     dev: false
 
+  /@remix-run/router/1.14.1:
+    resolution: {integrity: sha512-Qg4DMQsfPNAs88rb2xkdk03N3bjK4jgX5fR24eHCTR9q6PrhZQZ4UJBPzCHJkIpTRN1UKxx2DzjZmnC+7Lj0Ow==}
+    engines: {node: '>=14.0.0'}
+    dev: false
+
   /@rollup/rollup-android-arm-eabi/4.9.2:
     resolution: {integrity: sha512-RKzxFxBHq9ysZ83fn8Iduv3A283K7zPPYuhL/z9CQuyFrjwpErJx0h4aeb/bnJ+q29GRLgJpY66ceQ/Wcsn3wA==}
     cpu: [arm]
@@ -824,7 +833,7 @@ packages:
 
   /@types/uuid/9.0.7:
     resolution: {integrity: sha512-WUtIVRUZ9i5dYXefDEAI7sh9/O7jGvHg7Df/5O/gtH3Yabe5odI3UWopVR1qbPXQtvOxWu3mM4XxlYeZtMWF4g==}
-    dev: false
+    dev: true
 
   /@typescript-eslint/eslint-plugin/6.16.0_bzmrvv2elrxwu6gm3fkk6yklke:
     resolution: {integrity: sha512-O5f7Kv5o4dLWQtPX4ywPPa+v9G+1q1x8mz0Kr0pXUtKsevo+gIJHLkGc8RxaZWtP8RrhwhSNIWThnW42K9/0rQ==}
@@ -1102,6 +1111,11 @@ packages:
 
   /classnames/2.5.1:
     resolution: {integrity: sha512-saHYOzhIQs6wy2sVxTM6bUDsQO4F50V9RQ22qBpEdCW+I+/Wmke2HOl6lS6dTpdxVhb88/I6+Hs+438c3lfUow==}
+    dev: false
+
+  /clsx/1.2.1:
+    resolution: {integrity: sha512-EcR6r5a8bj6pu3ycsa/E/cKVGuTgZJZdsyUYHOksG/UHIiKfjxzRxYJpyVBwYaQeOvghal9fcc4PidlgzugAQg==}
+    engines: {node: '>=6'}
     dev: false
 
   /color-convert/1.9.3:
@@ -1910,6 +1924,29 @@ packages:
       warning: 4.0.3
     dev: false
 
+  /react-router-dom/6.21.1_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-QCNrtjtDPwHDO+AO21MJd7yIcr41UetYt5jzaB9Y1UYaPTCnVuJq6S748g1dE11OQlCFIQg+RtAA1SEZIyiBeA==}
+    engines: {node: '>=14.0.0'}
+    peerDependencies:
+      react: '>=16.8'
+      react-dom: '>=16.8'
+    dependencies:
+      '@remix-run/router': 1.14.1
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+      react-router: 6.21.1_react@18.2.0
+    dev: false
+
+  /react-router/6.21.1_react@18.2.0:
+    resolution: {integrity: sha512-W0l13YlMTm1YrpVIOpjCADJqEUpz1vm+CMo47RuFX4Ftegwm6KOYsL5G3eiE52jnJpKvzm6uB/vTKTPKM8dmkA==}
+    engines: {node: '>=14.0.0'}
+    peerDependencies:
+      react: '>=16.8'
+    dependencies:
+      '@remix-run/router': 1.14.1
+      react: 18.2.0
+    dev: false
+
   /react-select/5.8.0_yok4whjnfjlfyjmdmcaku5uzjq:
     resolution: {integrity: sha512-TfjLDo58XrhP6VG5M/Mi56Us0Yt8X7xD6cDybC7yoRMUNm7BGO7qk8J0TLQOua/prb8vUOtsfnXZwfm30HGsAA==}
     peerDependencies:
@@ -1929,6 +1966,17 @@ packages:
       use-isomorphic-layout-effect: 1.1.2_sowt5japhjbdixo6tryvx3gigm
     transitivePeerDependencies:
       - '@types/react'
+    dev: false
+
+  /react-toastify/9.1.3_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-fPfb8ghtn/XMxw3LkxQBk3IyagNpF/LIKjOBflbexr2AWxAH1MJgvnESwEwBn9liLFXgTKWgBSdZpw9m4OTHTg==}
+    peerDependencies:
+      react: '>=16'
+      react-dom: '>=16'
+    dependencies:
+      clsx: 1.2.1
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
     dev: false
 
   /react-transition-group/4.4.5_biqbaboplfbrettd7655fr4n2y:

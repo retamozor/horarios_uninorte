@@ -9,6 +9,7 @@ interface ScheduleCell {
 	start: Hour;
 	end: Hour;
 	nrc: string;
+	name: string;
 	label: JSX.Element;
 }
 
@@ -32,7 +33,8 @@ const useGetSchedule = () => {
 				day: sch.day,
 				start: sch.start,
 				end: sch.end,
-				nrc: nrc.name,
+				name: nrc.name,
+				nrc: nrc.nrc,
 				label: sch.classroom !== "" ? (
 					<>
 						<p style={{ margin: 0 }}>

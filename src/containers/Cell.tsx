@@ -29,6 +29,7 @@ interface CellProps {
 	toolTip: string,
 	color?: string;
 	onClick?: () => void;
+	className?: string;
 }
 
 const Cell: React.FC<React.PropsWithChildren<CellProps>> = ({
@@ -39,6 +40,7 @@ const Cell: React.FC<React.PropsWithChildren<CellProps>> = ({
 	toolTip,
 	children,
 	onClick,
+	className,
 }) => {
 	const hourStart = useMemo(() => {
 		if (start === "week") return "start-week";
@@ -55,7 +57,7 @@ const Cell: React.FC<React.PropsWithChildren<CellProps>> = ({
 	return (
 		<>
 			<div
-				className={[appStyle.cell, appStyle.shadow].join(" ")}
+				className={[appStyle.cell, appStyle.shadow, className].join(" ")}
 				id={`${day}-${start}-${end}`}
 				style={{
 					gridColumn: `${day}-start / ${day}-end`,

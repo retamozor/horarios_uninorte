@@ -10,12 +10,14 @@ import {
 	faCalendarDays,
 	faCaretLeft,
 	faCaretRight,
+	faPrint,
 } from "@fortawesome/free-solid-svg-icons";
 
 const ToolBar = () => {
 	const increase = useStore(state => state.increase);
 	const decrease = useStore(state => state.decrease);
 	const index = useStore(state => state.index);
+	const max = useStore(state => state.max);
 	const schedules = useStore(state => state.schedules);
 	const curses = useStore(state => state.curses);
 
@@ -27,26 +29,43 @@ const ToolBar = () => {
 
 	return (
 		<div className={[appStyle.toolBar, appStyle.shadow].join(" ")}>
-			<div className={appStyle["toolBar-header"]}>
+			<div className={[appStyle["toolBar-header"], appStyle["hide-on-print"]].join(' ')}>
 				<Row>
 					<Col xs="6">
 						<Button color="primary" size="sm" onClick={() => toggle()}>
 							<FontAwesomeIcon icon={faCalendarDays} /> Mi Proyeccion
 						</Button>
+						<Button className="mx-2" color="primary" size="sm" onClick={() => window.print()}>
+							<FontAwesomeIcon icon={faPrint} />
+						</Button>
 					</Col>
-					<Col className="d-flex justify-content-end">
-						<span>
-							{schedules.findIndex((_, i) => i === index) + 1} / {schedules.length}
+					<Col className="d-flex justify-content-end aling align-items-center">
+						<span style={{ fontSize: "1rem", lineHeight: "1rem" }}>
+							{schedules.findIndex((_, i) => i === index) + 1} /{" "}
+							{schedules.length}
 						</span>
 						<ButtonGroup className="mx-2" size="sm">
-							<Button color="primary" onClick={() => decrease(1)}>
+							<Button
+								disabled={index === 0}
+								color="primary"
+								onClick={() => decrease(1)}
+							>
 								<FontAwesomeIcon icon={faCaretLeft} />
 							</Button>
-							<Button color="primary" onClick={() => increase(1)}>
+							<Button
+								disabled={index === max}
+								color="primary"
+								onClick={() => increase(1)}
+							>
 								<FontAwesomeIcon icon={faCaretRight} />
 							</Button>
 						</ButtonGroup>
-						<Button id="expand" size="sm" color="primary" onClick={() => toggleExpand()}>
+						<Button
+							id="expand"
+							size="sm"
+							color="primary"
+							onClick={() => toggleExpand()}
+						>
 							<FontAwesomeIcon
 								icon={faAnglesDown}
 								rotation={expand ? 180 : undefined}
@@ -56,10 +75,10 @@ const ToolBar = () => {
 							target="expand"
 							delay={{
 								hide: 200,
-								show: 1000
+								show: 1000,
 							}}
 						>
-							{expand ? 'Contraer todo' : 'Expandir todo'}
+							{expand ? "Contraer todo" : "Expandir todo"}
 						</UncontrolledTooltip>
 					</Col>
 				</Row>
@@ -75,7 +94,9 @@ const ToolBar = () => {
 			{curses.map(curse => {
 				const schedule = schedules[index];
 				const nrc = schedule?.nrcs.find(nrc => nrc.curse === curse.curse);
-				return <Curse expand={expand} nrc={nrc} key={curse.curse} curse={curse} />;
+				return (
+					<Curse expand={expand} nrc={nrc} key={curse.curse} curse={curse} />
+				);
 			})}
 			<ProyeccionModal isOpen={isOpen} toggle={toggle} />
 		</div>

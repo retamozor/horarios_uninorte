@@ -180,7 +180,7 @@ const FilterModal: FC<FilterModalModalProps> = ({
 								<Button color="danger" type="button" onClick={toggle}>
 									Cancelar
 								</Button>
-								<Button color="primary" type="submit">
+								<Button color="success" type="submit">
 									Guardar
 								</Button>
 							</ModalFooter>

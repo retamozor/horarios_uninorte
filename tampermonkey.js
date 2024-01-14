@@ -5,8 +5,8 @@
 // @description  Genera tu horario uninorte
 // @author       Rafael
 // @match        https://pomelo.uninorte.edu.co/mihorario/*
-// @require	     https://github.com/retamozor/horarios_uninorte/raw/main/dist/assets/index-M4Qm4P3H.js 
-// @resource     AppStyles https://github.com/retamozor/horarios_uninorte/raw/main/dist/assets/index-4cXRdNB_.css
+// @require	     https://github.com/retamozor/horarios_uninorte/raw/main/dist/assets/index-nawsdrBH.js 
+// @resource     AppStyles https://github.com/retamozor/horarios_uninorte/raw/main/dist/assets/index-ioUoTLU7.css
 // @updateURL    https://github.com/retamozor/horarios_uninorte/raw/main/tampermonkey.js
 // @downloadURL  https://github.com/retamozor/horarios_uninorte/raw/main/tampermonkey.js
 // @grant        GM_addStyle

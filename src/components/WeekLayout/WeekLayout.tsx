@@ -41,7 +41,7 @@ const WeekLayout = () => {
 					{label}
 				</Cell>
 			))}
-			<Cell day="H" start="week" end="week" toolTip="Filtro por hora y dia" onClick={()=> setIsOpen(true)}>
+			<Cell className={appStyle["hide-on-print"]} day="H" start="week" end="week" toolTip="Filtro por hora y dia" onClick={()=> setIsOpen(true)}>
 				<FontAwesomeIcon icon={faFilter} size="2x" />
 			</Cell>
 			<Schedule />

@@ -1,3 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500;600;700&family=Prompt:wght@300;400;600;700&display=swap');
+
+:root {
+	font-family: Montserrat, Arial, Helvetica, sans-serif;
+}
+
 html,
 body {
 	margin: 0;
@@ -82,5 +88,61 @@ body {
 		grid-template-rows: auto auto;
 		height: auto;
 	}
-
 }
+
+@media print {
+	.hide-on-print {
+		display: none !important;
+	}
+
+	.layout {
+		grid-template-columns: 1fr;
+		grid-template-rows: auto auto;
+		height: auto;
+	}
+
+	div:has(.layout) {
+		overflow-y: unset !important;
+	}
+
+	.toolBar {
+		display: none;
+	}
+
+	.cell {
+		font-size: 10pt
+	}
+
+	.weekLayout {
+		width: min-content;
+		display: grid;
+		gap: .5rem;
+		overflow: unset;
+		grid-template-columns:
+			[H-start]       max-content
+			[H-end M-start] min-content
+			[M-end T-start] min-content
+			[T-end W-start] min-content
+			[W-end R-start] min-content
+			[R-end F-start] min-content
+			[F-end S-start] min-content [S-end];
+			grid-template-rows:
+			[start-week] 50px
+			[end-week h-06] min-content
+			[h-07] min-content
+			[h-08] min-content
+			[h-09] min-content
+			[h-10] min-content
+			[h-11] min-content
+			[h-12] min-content
+			[h-13] min-content
+			[h-14] min-content
+			[h-15] min-content
+			[h-16] min-content
+			[h-17] min-content
+			[h-18] min-content
+			[h-19] min-content [h-20];
+	}
+}
+
+
