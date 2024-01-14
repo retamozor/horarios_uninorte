@@ -20,7 +20,6 @@ specifiers:
   formik: ^2.4.5
   react: ^18.2.0
   react-dom: ^18.2.0
-  react-router-dom: ^6.21.1
   react-select: ^5.8.0
   react-toastify: ^9.1.3
   reactstrap: ^9.2.1
@@ -41,7 +40,6 @@ dependencies:
   formik: 2.4.5_react@18.2.0
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
-  react-router-dom: 6.21.1_biqbaboplfbrettd7655fr4n2y
   react-select: 5.8.0_yok4whjnfjlfyjmdmcaku5uzjq
   react-toastify: 9.1.3_biqbaboplfbrettd7655fr4n2y
   reactstrap: 9.2.1_biqbaboplfbrettd7655fr4n2y
@@ -553,11 +551,6 @@ packages:
 
   /@popperjs/core/2.11.8:
     resolution: {integrity: sha512-P1st0aksCrn9sGZhp8GMYwBnQsbvAWsZAX44oXNNvLHGqAOcoVxmjZiohstwQ7SqKnbR47akdNi+uleWD8+g6A==}
-    dev: false
-
-  /@remix-run/router/1.14.1:
-    resolution: {integrity: sha512-Qg4DMQsfPNAs88rb2xkdk03N3bjK4jgX5fR24eHCTR9q6PrhZQZ4UJBPzCHJkIpTRN1UKxx2DzjZmnC+7Lj0Ow==}
-    engines: {node: '>=14.0.0'}
     dev: false
 
   /@rollup/rollup-android-arm-eabi/4.9.2:
@@ -1922,29 +1915,6 @@ packages:
       react-dom: 18.2.0_react@18.2.0
       react-fast-compare: 3.2.2
       warning: 4.0.3
-    dev: false
-
-  /react-router-dom/6.21.1_biqbaboplfbrettd7655fr4n2y:
-    resolution: {integrity: sha512-QCNrtjtDPwHDO+AO21MJd7yIcr41UetYt5jzaB9Y1UYaPTCnVuJq6S748g1dE11OQlCFIQg+RtAA1SEZIyiBeA==}
-    engines: {node: '>=14.0.0'}
-    peerDependencies:
-      react: '>=16.8'
-      react-dom: '>=16.8'
-    dependencies:
-      '@remix-run/router': 1.14.1
-      react: 18.2.0
-      react-dom: 18.2.0_react@18.2.0
-      react-router: 6.21.1_react@18.2.0
-    dev: false
-
-  /react-router/6.21.1_react@18.2.0:
-    resolution: {integrity: sha512-W0l13YlMTm1YrpVIOpjCADJqEUpz1vm+CMo47RuFX4Ftegwm6KOYsL5G3eiE52jnJpKvzm6uB/vTKTPKM8dmkA==}
-    engines: {node: '>=14.0.0'}
-    peerDependencies:
-      react: '>=16.8'
-    dependencies:
-      '@remix-run/router': 1.14.1
-      react: 18.2.0
     dev: false
 
   /react-select/5.8.0_yok4whjnfjlfyjmdmcaku5uzjq:
