@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Mi Horario Uninorte
 // @namespace    https://github.com/retamozor/horarios_uninorte
-// @version      1.1
+// @version      1.2
 // @description  Genera tu horario uninorte
 // @author       Rafael
 // @match        https://pomelo.uninorte.edu.co/mihorario/*
