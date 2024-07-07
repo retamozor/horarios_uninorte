@@ -125,6 +125,10 @@ const FiltersModal: FC<FiltersModalModalProps> = ({
 												style={{ cursor: "pointer" }}
 											>
 												<Row>
+													<Col md="12">
+														<b>{nrc.name}</b>
+														
+													</Col>
 													<Col md="9">
 														<b>profesor: </b> {nrc.teacher}
 													</Col>
@@ -149,7 +153,7 @@ const FiltersModal: FC<FiltersModalModalProps> = ({
 													</Col>
 													<Col md="6">
 														<b>disponible: </b>
-														{nrc.available}
+														{nrc.available} / {nrc.capacity}
 													</Col>
 													<Col md="12">
 														<b>Horario: </b>

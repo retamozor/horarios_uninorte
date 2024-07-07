@@ -99,6 +99,7 @@ body {
 		grid-template-columns: 1fr;
 		grid-template-rows: auto auto;
 		height: auto;
+		margin: -1rem;
 	}
 
 	div:has(.layout) {
@@ -114,18 +115,20 @@ body {
 	}
 
 	.weekLayout {
-		width: min-content;
+		width: 100vw;
 		display: grid;
 		gap: .5rem;
 		overflow: unset;
+		box-shadow: none;
+		background: white;
 		grid-template-columns:
 			[H-start]       max-content
-			[H-end M-start] min-content
-			[M-end T-start] min-content
-			[T-end W-start] min-content
-			[W-end R-start] min-content
-			[R-end F-start] min-content
-			[F-end S-start] min-content [S-end];
+			[H-end M-start] 1fr
+			[M-end T-start] 1fr
+			[T-end W-start] 1fr
+			[W-end R-start] 1fr
+			[R-end F-start] 1fr
+			[F-end S-start] 1fr [S-end];
 			grid-template-rows:
 			[start-week] 50px
 			[end-week h-06] min-content

@@ -16,6 +16,8 @@ const useCalcAllschedules = () => {
 	const setIndex = useStore(state => state.setIndex);
 	const setMax = useStore(state => state.setMax);
 	const filterSchedule = useStore(state => state.filterSchedule);
+	const includeUnavailable = useStore(state => state.includeUnavailable);
+	const lockNRC = useStore(state => state.lockNRC);
 
 	const combine = (curses: Curse[]): Schedule[] => {
 		const curse = curses.pop();
@@ -64,7 +66,7 @@ const useCalcAllschedules = () => {
 		};
 		schedule.nrcs.forEach(nrc => {
 			//penalizacion por no tener cupos
-			schedule.score += nrc.available === 0 ? -25 : 0; 
+			schedule.score += nrc.available === 0 ? -35 : 0;
 			nrc.schedules.forEach(sch => {
 				days[sch.day].push(sch);
 			});
@@ -75,7 +77,7 @@ const useCalcAllschedules = () => {
 			// puntaje por inicio y fin de clases
 			schedule.score +=
 				Number(days[key][0]?.start ?? "20") -
-				Number(days[key][days[key].length - 1]?.end ?? "06") +
+				1.5 * Number(days[key][days[key].length - 1]?.end ?? "06") +
 				14;
 			// puntaje por dia libre
 			if (days[key].length === 0) {
@@ -107,15 +109,43 @@ const useCalcAllschedules = () => {
 	};
 
 	useEffect(() => {
-		const newSchedules = combine([
-			...filteredCurses.filter(curse => curse.nrcs.length !== 0),
-			filterSchedule,
-		]).filter(sch => !haveConflict(sch));
+		const filteredSchedules = filteredCurses.filter(
+			curse => curse.nrcs.length !== 0
+		);
+		const schedules = includeUnavailable
+			? filteredSchedules.map(curse => ({
+					...curse,
+					nrcs: curse.nrcs.filter(nrc => {
+						if (
+							lockNRC[nrc.curse] !== null &&
+							lockNRC[nrc.curse] !== undefined
+						) {
+							return lockNRC[nrc.curse] === nrc.nrc;
+						}
+						return true;
+					}),
+			  }))
+			: filteredSchedules.map(curse => ({
+					...curse,
+					nrcs: curse.nrcs.filter(nrc => {
+						if (
+							lockNRC[curse.curse] !== null &&
+							lockNRC[curse.curse] !== undefined
+						) {
+							return lockNRC[curse.curse] === nrc.nrc && nrc.available !== 0;
+						}
+						return nrc.available !== 0;
+					}),
+			  }));
+
+		const newSchedules = combine([...schedules, filterSchedule]).filter(
+			sch => !haveConflict(sch)
+		);
 		setMax(newSchedules.length - 1);
 		setIndex(0);
 		newSchedules.forEach(calcScore);
 		setSchedules(newSchedules.sort((a, b) => b.score - a.score));
-	}, [filteredCurses, filterSchedule]);
+	}, [filteredCurses, filterSchedule, includeUnavailable, lockNRC]);
 	return schedules;
 };
 

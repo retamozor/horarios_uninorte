@@ -22,6 +22,10 @@ interface State {
 	selectedCurses: Proyeccion[];
 	filter: FilterCurses;
 	filterSchedule: Curse;
+	isLoadingCurses: boolean;
+	isLoadingProyeccion: boolean;
+	includeUnavailable: boolean;
+	lockNRC: { [key: string]: string | null };
 	setMax: (by: number) => void;
 	increase: (by: number) => void;
 	decrease: (by: number) => void;
@@ -33,6 +37,10 @@ interface State {
 	setSelectedCurses: (selectedCurses: Proyeccion[]) => void;
 	setFilter: (curse: string, value: Filter[]) => void;
 	setFilterSchedule: (filterSchedule: Curse) => void;
+	setIsLoadingCurses: (isLoadingCurses: boolean) => void;
+	setIsLoadingProyeccion: (isLoadingProyeccion: boolean) => void;
+	setIncludeUnavailable: (includeUnavailable: boolean) => void;
+	setLockNRC: (curse: string, nrc: string | null) => void;
 }
 
 interface HorUN {
@@ -71,6 +79,10 @@ export const useStore = create<State>()((set, get) => ({
 			},
 		],
 	},
+	isLoadingCurses: true,
+	isLoadingProyeccion: true,
+	includeUnavailable: false,
+	lockNRC: {},
 	setMax: by => {
 		if (by < 0) {
 			set({ max: 0 });
@@ -116,5 +128,10 @@ export const useStore = create<State>()((set, get) => ({
 		});
 		set({ filter, filteredCurses });
 	},
-	setFilterSchedule: (filterSchedule) => set({filterSchedule})
+	setFilterSchedule: filterSchedule => set({ filterSchedule }),
+	setIsLoadingCurses: isLoadingCurses => set({ isLoadingCurses }),
+	setIsLoadingProyeccion: isLoadingProyeccion => set({ isLoadingProyeccion }),
+	setIncludeUnavailable: includeUnavailable => set({ includeUnavailable }),
+	setLockNRC: (curse, nrc) =>
+		set({ lockNRC: { ...get().lockNRC, [curse]: nrc } }),
 }));

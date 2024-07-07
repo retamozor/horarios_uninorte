@@ -11,6 +11,7 @@ import {
 	faCaretLeft,
 	faCaretRight,
 	faPrint,
+	faSpinner,
 } from "@fortawesome/free-solid-svg-icons";
 
 const ToolBar = () => {
@@ -20,6 +21,7 @@ const ToolBar = () => {
 	const max = useStore(state => state.max);
 	const schedules = useStore(state => state.schedules);
 	const curses = useStore(state => state.curses);
+	const isLoadingCurses = useStore(state => state.isLoadingCurses);
 
 	const [isOpen, setIsOpen] = useState(false);
 	const toggle = () => setIsOpen(o => !o);
@@ -29,13 +31,22 @@ const ToolBar = () => {
 
 	return (
 		<div className={[appStyle.toolBar, appStyle.shadow].join(" ")}>
-			<div className={[appStyle["toolBar-header"], appStyle["hide-on-print"]].join(' ')}>
+			<div
+				className={[appStyle["toolBar-header"], appStyle["hide-on-print"]].join(
+					" "
+				)}
+			>
 				<Row>
 					<Col xs="6">
 						<Button color="primary" size="sm" onClick={() => toggle()}>
 							<FontAwesomeIcon icon={faCalendarDays} /> Mi Proyeccion
 						</Button>
-						<Button className="mx-2" color="primary" size="sm" onClick={() => window.print()}>
+						<Button
+							className="mx-2"
+							color="primary"
+							size="sm"
+							onClick={() => window.print()}
+						>
 							<FontAwesomeIcon icon={faPrint} />
 						</Button>
 					</Col>
@@ -91,13 +102,30 @@ const ToolBar = () => {
 					}}
 				/>
 			</div>
-			{curses.map(curse => {
-				const schedule = schedules[index];
-				const nrc = schedule?.nrcs.find(nrc => nrc.curse === curse.curse);
-				return (
-					<Curse expand={expand} nrc={nrc} key={curse.curse} curse={curse} />
-				);
-			})}
+			{isLoadingCurses ? (
+				<div
+					style={{
+						display: "flex",
+						justifyContent: "center",
+						alignItems: "center",
+						height: "100%",
+					}}
+				>
+					<FontAwesomeIcon icon={faSpinner} spin size="2x" color="gray" />
+				</div>
+			) : (
+				curses.map(curse => {
+					const schedule = schedules[index];
+					const names = curse.nrcs.flatMap(c => c.curse)
+					const nrc = schedule?.nrcs.find(
+						nrc =>
+							names.includes(nrc.curse)
+					);
+					return (
+						<Curse expand={expand} nrc={nrc} key={curse.curse} curse={curse} />
+					);
+				})
+			)}
 			<ProyeccionModal isOpen={isOpen} toggle={toggle} />
 		</div>
 	);

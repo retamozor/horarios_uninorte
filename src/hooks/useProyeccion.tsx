@@ -13,6 +13,7 @@ const useProyeccion = () => {
 	const getHorun = useStore(state => state.getHorun);
 	const proyeccion = useStore(state => state.proyeccion);
 	const setProyeccion = useStore(state => state.setProyeccion);
+	const setIsLoadingProyeccion = useStore(state => state.setIsLoadingProyeccion);
 
 	useEffect(() => {
 		const controller = new AbortController();
@@ -22,11 +23,16 @@ const useProyeccion = () => {
 				signal: controller.signal,
 			})
 			.then(res => setProyeccion(res.data))
-			.catch(_ => setProyeccion([]));
-		// setProyeccion(data);
+			.catch(_ => setProyeccion([]))
+			.finally(() => setIsLoadingProyeccion(false));
+			// setTimeout(() => {
+			// 	setProyeccion(data);
+			// 	setIsLoadingProyeccion(false)
+			// }, 5000)
 
 		return () => {
 			controller.abort();
+			setIsLoadingProyeccion(true)
 		};
 	}, []);
 

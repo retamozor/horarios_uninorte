@@ -1,16 +1,21 @@
 import { FC } from "react";
 import { Button } from "reactstrap";
 import { useStore } from "../../data/useStore";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faLock } from "@fortawesome/free-solid-svg-icons";
 
 interface NrcButtonProps {
 	active: boolean;
 	nrc: string;
+	curse: string;
 	available: number;
 }
 
-const NrcButton: FC<NrcButtonProps> = ({ active, nrc, available }) => {
+const NrcButton: FC<NrcButtonProps> = ({ active, nrc, available, curse }) => {
 	const schedules = useStore(state => state.schedules);
 	const setIndex = useStore(state => state.setIndex);
+	const lockNRC = useStore(state => state.lockNRC);
+	const setLockNRC = useStore(state => state.setLockNRC);
 
 	return (
 		<Button
@@ -28,7 +33,10 @@ const NrcButton: FC<NrcButtonProps> = ({ active, nrc, available }) => {
 				!schedules.some(sch => sch.nrcs.some(schNrc => schNrc.nrc === nrc))
 			}
 			onClick={() => {
-				if (active) return;
+				if (active) {
+					lockNRC[curse] ? setLockNRC(curse, null) : setLockNRC(curse, nrc);
+					return;
+				}
 				const newIndex = schedules.findIndex(sch =>
 					sch.nrcs.some(schNrc => schNrc.nrc === nrc)
 				);
@@ -36,7 +44,7 @@ const NrcButton: FC<NrcButtonProps> = ({ active, nrc, available }) => {
 				setIndex(newIndex);
 			}}
 		>
-			{nrc}
+			{nrc} {lockNRC[curse] === nrc ? <FontAwesomeIcon icon={faLock} /> : null}
 		</Button>
 	);
 };

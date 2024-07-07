@@ -32,6 +32,7 @@ const useMapData = () => {
   const cursos = useCursos();
 
 	useEffect(() => {
+		console.log('mapping')
 		const curses = Object.values(cursos).map(value => {
 			const nrcs = Object.values(value);
 

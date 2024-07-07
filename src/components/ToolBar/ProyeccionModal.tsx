@@ -1,10 +1,18 @@
-import { FC, useState } from "react";
-import { Button, Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
+import { FC, useEffect, useState } from "react";
+import {
+	Button,
+	Label,
+	Modal,
+	ModalBody,
+	ModalFooter,
+	ModalHeader,
+} from "reactstrap";
 import { useStore } from "../../data/useStore";
 import Select, { MultiValue } from "react-select";
 import { Proyeccion } from "../../hooks/useProyeccion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCalendarDays } from "@fortawesome/free-solid-svg-icons";
+import { faCalendarDays, faSpinner } from "@fortawesome/free-solid-svg-icons";
+import GroupingModal from "./GroupingModal";
 
 interface ProyeccionModalProps {
 	isOpen: boolean;
@@ -15,7 +23,22 @@ const ProyeccionModal: FC<ProyeccionModalProps> = ({ isOpen, toggle }) => {
 	const getHorun = useStore(state => state.getHorun);
 	const proyeccion = useStore(state => state.proyeccion);
 	const setSelectedCurses = useStore(state => state.setSelectedCurses);
+	const isLoadingProyeccion = useStore(state => state.isLoadingProyeccion);
+	const isLoadingCurses = useStore(state => state.isLoadingCurses);
 	const [value, setValue] = useState<MultiValue<Proyeccion>>([]);
+	const [isOpenGrouping, setIsOpenGrouping] = useState(false);
+
+	useEffect(() => {
+		function onCursesLoadEnd() {
+			setIsOpenGrouping(true);
+		}
+
+		window.addEventListener("onCursesLoadEnd", onCursesLoadEnd);
+
+		return () => {
+			window.removeEventListener("onCursesLoadEnd", onCursesLoadEnd);
+		};
+	}, []);
 
 	return (
 		<Modal toggle={toggle} isOpen={isOpen}>
@@ -24,19 +47,48 @@ const ProyeccionModal: FC<ProyeccionModalProps> = ({ isOpen, toggle }) => {
 				{getHorun().periodo}
 			</ModalHeader>
 			<ModalBody>
-				<p>
-					<b>Total creditos: </b>
-					{value?.reduce((prev, curr) => prev + curr.CREDITOS, 0)}
-				</p>
-				<Select
-					options={proyeccion}
-					getOptionLabel={opt =>
-						`${opt.NOMBRE} (${opt.CREDITOS} creditos): ${opt.MATERIACURSO}`
-					}
-					getOptionValue={opt => opt.MATERIACURSO}
-					value={value}
-					isMulti
-					onChange={opt => setValue(opt)}
+				{isLoadingCurses ? (
+					<div
+						style={{
+							display: "flex",
+							justifyContent: "center",
+							alignItems: "center",
+							height: "133px",
+						}}
+					>
+						<FontAwesomeIcon icon={faSpinner} spin size="2x" color="gray" />
+					</div>
+				) : (
+					<>
+						<p>
+							<b>Total creditos: </b>
+							{value?.reduce((prev, curr) => prev + curr.CREDITOS, 0)}
+						</p>
+						<Label style={{ margin: 0 }} htmlFor="proyeccion">
+							Cursos
+						</Label>
+						<Select
+							inputId="proyeccion"
+							options={proyeccion}
+							getOptionLabel={opt =>
+								`${opt.NOMBRE} (${opt.CREDITOS} creditos): ${opt.MATERIACURSO}`
+							}
+							placeholder={"Nombre (creditos): MATERIA-CURSO"}
+							isLoading={isLoadingProyeccion}
+							getOptionValue={opt => opt.MATERIACURSO}
+							value={value}
+							isMulti
+							onChange={opt => setValue(opt)}
+						/>
+					</>
+				)}
+
+				<GroupingModal
+					isOpen={isOpenGrouping}
+					toggle={() => {
+						setIsOpenGrouping(o => !o);
+						toggle();
+					}}
 				/>
 			</ModalBody>
 			<ModalFooter>
@@ -51,8 +103,10 @@ const ProyeccionModal: FC<ProyeccionModalProps> = ({ isOpen, toggle }) => {
 				<Button
 					color="success"
 					onClick={() => {
-						toggle();
 						setSelectedCurses(value.map(val => val));
+						if (value.length === 0) {
+							toggle();
+						}
 					}}
 				>
 					Guardar

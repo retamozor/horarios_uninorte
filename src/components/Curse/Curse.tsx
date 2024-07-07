@@ -1,6 +1,7 @@
 import appStyle from "../../assets/css/app.module.css";
 import { FC, useEffect, useState } from "react";
-import { Curse, Nrc } from "../../hooks/useMapData";
+import type { Curse } from "../../hooks/useMapData";
+import { Nrc } from "../../hooks/useMapData";
 import { useStore } from "../../data/useStore";
 import { randomLightColor } from "seed-to-color";
 import { Row, Col, Button, ButtonGroup, UncontrolledTooltip } from "reactstrap";
@@ -22,14 +23,14 @@ interface CurseProps {
 	expand: boolean;
 }
 const Curse: FC<CurseProps> = ({ nrc, curse, expand }) => {
-	const filteredCurses = useStore(state => state.filteredCurses);
+	const curses = useStore(state => state.curses);
 	const setFilter = useStore(state => state.setFilter);
 
 	const [open, setOpen] = useState(false);
 	const [filtersOpen, setFiltersOpen] = useState(false);
 	const [disabled, setDisabled] = useState(false);
 
-	const nrcs = filteredCurses.find(c => c.curse === curse.curse)?.nrcs ?? [];
+	const nrcs = curses.find(c => c.curse === curse.curse)?.nrcs ?? [];
 
 	const toggle = () => setOpen(o => !o);
 
@@ -41,13 +42,16 @@ const Curse: FC<CurseProps> = ({ nrc, curse, expand }) => {
 		<div
 			className={appStyle.shadow}
 			style={{
-				marginBlock: ".5rems",
-				background: `#${randomLightColor(curse.name)}`,
+				background: `#${randomLightColor(nrc?.name || curse.name)}`,
 			}}
 		>
 			<Row>
 				<Col sm={8} className="mb-2">
-					<b>{curse.name}</b>
+					{nrc && curse.curse !== nrc.curse ? (
+						<b>{nrc?.name} ({curse.name})</b>
+					) : (
+						<b>{curse.name}</b>
+					)}
 				</Col>
 				<Col
 					sm={4}
@@ -60,6 +64,7 @@ const Curse: FC<CurseProps> = ({ nrc, curse, expand }) => {
 						<NrcButton
 							key={curseNrc.nrc}
 							active={curseNrc.nrc === nrc?.nrc}
+							curse={curse.curse}
 							nrc={curseNrc.nrc}
 							available={curseNrc.available}
 						/>
@@ -98,11 +103,7 @@ const Curse: FC<CurseProps> = ({ nrc, curse, expand }) => {
 								show: 1000,
 							}}
 						>
-							{disabled ? (
-								"Habilitar"
-							) : (
-								"Deshabilitar"
-							)}
+							{disabled ? "Habilitar" : "Deshabilitar"}
 						</UncontrolledTooltip>
 						<Button
 							size="sm"
@@ -144,7 +145,7 @@ const Curse: FC<CurseProps> = ({ nrc, curse, expand }) => {
 					</ButtonGroup>
 				</Col>
 			</Row>
-			<Detail isOpen={open} nrc={nrc} />
+			<Detail isOpen={open} nrc={nrc} showName={curse.curse !== nrc?.curse} />
 			<FiltersModal
 				isOpen={filtersOpen}
 				toggle={() => setFiltersOpen(false)}

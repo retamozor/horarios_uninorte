@@ -4,7 +4,7 @@ import useCalcAllschedules from "./useCalcAllschedules";
 import { useStore } from "../data/useStore";
 import { Nrc } from "./useMapData";
 
-interface ScheduleCell {
+export interface ScheduleCell {
 	day: Day;
 	start: Hour;
 	end: Hour;
