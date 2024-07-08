@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { persist } from "zustand/middleware";
+import { persist, createJSONStorage } from "zustand/middleware";
 import { Schedule } from "../hooks/useCalcAllschedules";
 import { Curse } from "../hooks/useMapData";
 import { Proyeccion } from "../hooks/useProyeccion";
@@ -202,6 +202,7 @@ export const useStore = create<State>()(
 		}),
 		{
 			name: "horario-uninorte",
+			storage: createJSONStorage(() => sessionStorage),
 			partialize: state => ({
 				selectedCurses: state.selectedCurses,
 				lockNRC: state.lockNRC,
