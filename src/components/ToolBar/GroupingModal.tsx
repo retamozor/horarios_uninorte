@@ -16,17 +16,10 @@ import Select from "react-select";
 import appStyle from "../../assets/css/app.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faObjectGroup } from "@fortawesome/free-solid-svg-icons";
-import type { Curse } from "../../hooks/useMapData";
 
 interface GroupingModalProps {
 	isOpen: boolean;
 	toggle: () => void;
-}
-
-interface Group {
-	name: string;
-	curse: string;
-	curses: Curse[];
 }
 
 const GroupingModal: FC<GroupingModalProps> = ({ isOpen, toggle }) => {
@@ -34,8 +27,11 @@ const GroupingModal: FC<GroupingModalProps> = ({ isOpen, toggle }) => {
 	const isLoadingProyeccion = useStore(state => state.isLoadingProyeccion);
 	const [name, setName] = useState("");
 	const [message, setMessage] = useState("");
-	const [groups, setGroups] = useState<Group[]>([]);
-	const setCurses = useStore(state => state.setCurses);
+	const groups = useStore(state => state.groups);
+	const addGroup = useStore(state => state.addGroup);
+	const setGroup = useStore(state => state.setGroup);
+	const deleteGroup = useStore(state => state.deleteGroup);
+	const addGroupToCurses = useStore(state => state.addGroupToCurses);
 
 	const options = useMemo(() => {
 		const groupCurses = groups.flatMap(g => g.curses);
@@ -43,17 +39,6 @@ const GroupingModal: FC<GroupingModalProps> = ({ isOpen, toggle }) => {
 			curse => !groupCurses.some(c => c.curse === curse.curse)
 		);
 	}, [groups]);
-
-	const setGroup = (curse: string, newValue: (old: Group) => Group) => {
-		setGroups(g =>
-			g.map(group => {
-				if (curse === group.curse) {
-					return newValue(group);
-				}
-				return group;
-			})
-		);
-	};
 
 	const save = () => {
 		setMessage("");
@@ -66,17 +51,7 @@ const GroupingModal: FC<GroupingModalProps> = ({ isOpen, toggle }) => {
 			return;
 		}
 
-		const newGroups = groups.map((g): Curse => {
-			const nrcs = g.curses.flatMap(curse => curse.nrcs);
-			return {
-				name: g.name,
-				curse: g.curse,
-				nrcs,
-			};
-		});
-
-		const newCurses = [...options, ...newGroups];
-		setCurses(newCurses);
+		addGroupToCurses();
 		toggle();
 	};
 
@@ -105,14 +80,7 @@ const GroupingModal: FC<GroupingModalProps> = ({ isOpen, toggle }) => {
 							color="primary"
 							className="float-end mt-4"
 							onClick={() => {
-								const newGroup = {
-									name,
-									curse: `ELG${(Math.random() * 1000)
-										.toFixed(0)
-										.padStart(4, "0")}`,
-									curses: [],
-								};
-								setGroups(g => [...g, newGroup]);
+								addGroup(name);
 								setName("");
 								setMessage("");
 							}}
@@ -183,7 +151,7 @@ const GroupingModal: FC<GroupingModalProps> = ({ isOpen, toggle }) => {
 							className="mt-2"
 							color="danger"
 							onClick={() => {
-								setGroups(prev => prev.filter(g => g.curse !== group.curse));
+								deleteGroup(group.curse);
 							}}
 						>
 							Eliminar

@@ -16,15 +16,12 @@ const CurseNavigator: FC<CurseNavigatorProps> = ({ nrc }) => {
 
 	const availableSch = useMemo(() => {
 		const filters = schedules[index]?.nrcs
-			.map(n => ({ nrc: n.nrc, curse: n.curse }))
+			.map(n => ({ nrc: n.nrc }))
 			.filter(n => n.nrc !== nrc);
-		return schedules.filter(schedule => {
-			return schedule.nrcs.every(n => {
-				const filter = filters.find(filter => filter.curse === n.curse);
-				if (filter === undefined) return true;
-				return filter.nrc === n.nrc;
-			});
+		const avl = schedules.filter(schedule => {
+			return filters.every(filter => schedule.nrcs.some(n => n.nrc === filter.nrc));
 		});
+		return avl;
 	}, [schedules, index]);
 
 	const availableSchIndex = availableSch.map(avl =>

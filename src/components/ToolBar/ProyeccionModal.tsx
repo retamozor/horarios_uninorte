@@ -23,14 +23,18 @@ const ProyeccionModal: FC<ProyeccionModalProps> = ({ isOpen, toggle }) => {
 	const getHorun = useStore(state => state.getHorun);
 	const proyeccion = useStore(state => state.proyeccion);
 	const setSelectedCurses = useStore(state => state.setSelectedCurses);
+	const selectedCurses = useStore(state => state.selectedCurses);
 	const isLoadingProyeccion = useStore(state => state.isLoadingProyeccion);
 	const isLoadingCurses = useStore(state => state.isLoadingCurses);
-	const [value, setValue] = useState<MultiValue<Proyeccion>>([]);
+	const setGroups = useStore(state => state.setGroups);
+	const [value, setValue] = useState<MultiValue<Proyeccion>>(selectedCurses);
 	const [isOpenGrouping, setIsOpenGrouping] = useState(false);
 
 	useEffect(() => {
 		function onCursesLoadEnd() {
-			setIsOpenGrouping(true);
+			if(isOpen) {
+				setIsOpenGrouping(true);
+			}
 		}
 
 		window.addEventListener("onCursesLoadEnd", onCursesLoadEnd);
@@ -38,7 +42,7 @@ const ProyeccionModal: FC<ProyeccionModalProps> = ({ isOpen, toggle }) => {
 		return () => {
 			window.removeEventListener("onCursesLoadEnd", onCursesLoadEnd);
 		};
-	}, []);
+	}, [isOpen]);
 
 	return (
 		<Modal toggle={toggle} isOpen={isOpen}>
@@ -78,7 +82,10 @@ const ProyeccionModal: FC<ProyeccionModalProps> = ({ isOpen, toggle }) => {
 							getOptionValue={opt => opt.MATERIACURSO}
 							value={value}
 							isMulti
-							onChange={opt => setValue(opt)}
+							onChange={opt => {
+								setValue(opt)
+								setGroups([]);
+							}}
 						/>
 					</>
 				)}

@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Day, Hour } from "../containers/Cell";
 import { useStore } from "../data/useStore";
 import useCursos from "./useCursos";
@@ -28,11 +28,13 @@ interface Schedule {
 }
 
 const useMapData = () => {
-  const setCurses = useStore(state => state.setCurses);
-  const cursos = useCursos();
+	const setCurses = useStore(state => state.setCurses);
+	const addGroupToCurses = useStore(state => state.addGroupToCurses);
+	const [added, setAdded] = useState(false);
+
+	const cursos = useCursos();
 
 	useEffect(() => {
-		console.log('mapping')
 		const curses = Object.values(cursos).map(value => {
 			const nrcs = Object.values(value);
 
@@ -59,6 +61,10 @@ const useMapData = () => {
 			};
 		});
 		setCurses(curses);
+		if (!added && curses.length !== 0) {
+			addGroupToCurses();
+			setAdded(true);
+		}
 	}, [cursos]);
 
 	return;
