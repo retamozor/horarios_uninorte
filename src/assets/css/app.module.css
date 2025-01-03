@@ -63,7 +63,8 @@ body {
 		[T-end W-start] minmax(max-content, 1fr)
 		[W-end R-start] minmax(max-content, 1fr)
 		[R-end F-start] minmax(max-content, 1fr)
-		[F-end S-start] minmax(max-content, 1fr) [S-end];
+		[F-end S-start] minmax(max-content, 1fr)
+		[S-end U-start] minmax(max-content, 1fr) [U-end];
 	grid-template-rows:
 		[start-week] minmax(50px, 1fr)
 		[end-week h-06] minmax(min-content, 1fr)
@@ -128,7 +129,8 @@ body {
 			[T-end W-start] 1fr
 			[W-end R-start] 1fr
 			[R-end F-start] 1fr
-			[F-end S-start] 1fr [S-end];
+			[F-end S-start] 1fr
+			[S-end U-start] 1fr [U-end];
 			grid-template-rows:
 			[start-week] 50px
 			[end-week h-06] min-content

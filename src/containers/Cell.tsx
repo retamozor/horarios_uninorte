@@ -20,7 +20,7 @@ export type Hour =
 	| "19"
 	| "20";
 
-export type Day = "H" | "M" | "T" | "W" | "R" | "F" | "S";
+export type Day = "H" | "M" | "T" | "W" | "R" | "F" | "S" | "U";
 
 interface CellProps {
 	day: Day;

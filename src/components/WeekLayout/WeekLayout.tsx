@@ -13,6 +13,7 @@ const days: { day: Day; label: string }[] = [
 	{ day: "R", label: "Jueves" },
 	{ day: "F", label: "Viernes" },
 	{ day: "S", label: "Sabado" },
+	{ day: "U", label: "Domingo" },
 ];
 
 const hours = Array.from({ length: 14 }, (_, k) => {

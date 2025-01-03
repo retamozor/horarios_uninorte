@@ -63,6 +63,7 @@ const useCalcAllschedules = () => {
 			R: [],
 			F: [],
 			S: [],
+			U: [],
 		};
 		schedule.nrcs.forEach(nrc => {
 			//penalizacion por no tener cupos
