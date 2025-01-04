@@ -83,6 +83,16 @@ body {
 		[h-19] minmax(min-content, 1fr) [h-20];
 }
 
+.detail-layout {
+	page-break-before: always;
+}
+
+@media screen {
+	.show-on-print {
+		display: none !important;
+	}
+}
+
 @media screen and (width <= 768px) {
 	.layout {
 		grid-template-columns: 1fr;
@@ -92,6 +102,12 @@ body {
 }
 
 @media print {
+	.detail-layout {
+		padding: 2cm;
+		display: flex;
+		gap: 11pt;
+		flex-direction: column;
+	}
 	.hide-on-print {
 		display: none !important;
 	}

@@ -10,9 +10,9 @@ import {
 	faCalendarDays,
 	faCaretLeft,
 	faCaretRight,
-	faPrint,
 	faSpinner,
 } from "@fortawesome/free-solid-svg-icons";
+import PrintButton from "../PrintButton/PrintButton";
 
 const ToolBar = () => {
 	const increase = useStore(state => state.increase);
@@ -41,14 +41,7 @@ const ToolBar = () => {
 						<Button color="primary" size="sm" onClick={() => toggle()}>
 							<FontAwesomeIcon icon={faCalendarDays} /> Mi Proyeccion
 						</Button>
-						<Button
-							className="mx-2"
-							color="primary"
-							size="sm"
-							onClick={() => window.print()}
-						>
-							<FontAwesomeIcon icon={faPrint} />
-						</Button>
+						<PrintButton />
 					</Col>
 					<Col className="d-flex justify-content-end aling align-items-center">
 						<span style={{ fontSize: "1rem", lineHeight: "1rem" }}>

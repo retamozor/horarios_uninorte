@@ -7,13 +7,14 @@ interface DetailProps {
 	isOpen: boolean;
 	nrc?: Nrc;
 	showName?: boolean;
+	print?: boolean;
 }
 
-const Detail: FC<DetailProps> = ({ isOpen, nrc, showName }) => {
+const Detail: FC<DetailProps> = ({ isOpen, nrc, showName, print }) => {
 	return (
 		<Collapse isOpen={isOpen}>
-			<div className={appStyle.shadow}>
-				{showName ? (
+			<div className={print ? appStyle["show-on-print"] : appStyle.shadow}>
+				{showName || print ? (
 					<p style={{ margin: 0 }}>
 						<b>{nrc?.name ?? ""}</b>
 					</p>

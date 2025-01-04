@@ -25,10 +25,10 @@ const useProyeccion = () => {
 			.then(res => setProyeccion(res.data))
 			.catch(_ => setProyeccion([]))
 			.finally(() => setIsLoadingProyeccion(false));
-			// setTimeout(() => {
-			// 	setProyeccion(data);
-			// 	setIsLoadingProyeccion(false)
-			// }, 5000)
+		// setTimeout(() => {
+		// 	setProyeccion(data);
+		// 	setIsLoadingProyeccion(false)
+		// }, 5000)
 
 		return () => {
 			controller.abort();
